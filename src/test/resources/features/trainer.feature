@@ -1,11 +1,18 @@
-Feature: Start a game
+Feature: Start new game
   As a User:
-  I want to start a game
+  I want to start a new game
   So I can start playing lingo
+  Scenario: I start a new game
+    When I start a new game
+    Then I should see that a new game has started
 Feature: Start a round
   As a User:
   I want to be able to start a round
   In order to start guessing the word of that round
+  Scenario: I start a new round
+  Given I am playing a game
+  When I start a new round
+  Then The round is started with the word to guess "lingo"
 Feature: Guess 5 letter word
   As a User:
   I want to guess a 5 letter word
