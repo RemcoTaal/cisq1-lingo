@@ -51,7 +51,21 @@ public class Feedback {
     }
 
     public List<Character> giveHint(List<Character> previousHint, String wordToGuess){
-        return List.of('a');
+        List<Character> hint = new ArrayList<>();
+
+        if (previousHint != null) {
+            hint = previousHint;
+        }
+
+        for (int i = 0; i < wordToGuess.length(); i++){
+            if (letterFeedbackList.get(i) == LetterFeedback.CORRECT){
+                hint.add(wordToGuess.charAt(i));
+            }
+            else {
+                hint.add('.');
+            }
+        }
+        return hint;
     }
 
 
