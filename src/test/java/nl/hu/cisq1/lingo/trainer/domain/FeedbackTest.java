@@ -1,16 +1,21 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidFeedbackException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FeedbackTest {
     @Test
     @DisplayName("word is guessed if all letters are correct")
-    void wordIsGuessed(){
+    void wordIsGuessed() {
         // When
         Feedback feedback = new Feedback("woord", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
         // Then
@@ -20,7 +25,7 @@ class FeedbackTest {
 
     @Test
     @DisplayName("word is not guessed if not all the letters are correct")
-    void wordIsNotGuessed(){
+    void wordIsNotGuessed() {
         // When
         Feedback feedback = new Feedback("weird", List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
         // Then
@@ -43,5 +48,48 @@ class FeedbackTest {
         Feedback feedback = new Feedback("woordt", List.of(LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID));
         // Then
         assertFalse(feedback.isValid());
+    }
+
+    @Test
+    @DisplayName("feedback is correct if length of attempt is equals to size of letterfeedback list")
+    void isValid() {
+        // Given
+        Feedback validFeedback = new Feedback("woord", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        // When
+        Feedback feedback = Feedback.valid("woord");
+        // Then
+        assertEquals(validFeedback, feedback);
+    }
+
+    @Test
+    @DisplayName("feedback is invalid if length of attempt is not equals to size of letterfeedback list")
+    void isInvalid() {
+        assertThrows(
+                // Then
+                InvalidFeedbackException.class,
+                // When
+                () -> Feedback.invalid("woord")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideHintsForGiveHint")
+    @DisplayName("provide a hint based on the previous hint, guessedWord and word to guess")
+    List<Character> giveHint() {
+        // Given
+        Feedback feedback = new Feedback("weird", List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        // When
+        List<Character> hint = feedback.giveHint(null, "woord");
+        // Then
+
+
+    }
+
+    private static Stream<Arguments> provideHintsForGiveHint() {
+        return Stream.of(
+                Arguments.of(List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('.', '.', '.', 'r', 'd'), List.of('w', '.', '.', 'r', 'd')),
+                Arguments.of(List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('w', '.', '.', 'r', 'd')),
+        );
+
     }
 }
