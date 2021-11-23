@@ -3,7 +3,6 @@ package nl.hu.cisq1.lingo.trainer.domain;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidFeedbackException;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -76,7 +75,7 @@ public class Feedback {
         // Add the first character of the word to guess to the array
         hint.add(wordToGuess.charAt(0));
 
-        // Loop over the length of the word started from index 1, so the second character
+        // Loop over the length of the word starting from index 1
         for (int i = 1; i < wordToGuess.length(); i++){
             if (letterFeedbackList.get(i) == LetterFeedback.CORRECT){
                 hint.add(wordToGuess.charAt(i));

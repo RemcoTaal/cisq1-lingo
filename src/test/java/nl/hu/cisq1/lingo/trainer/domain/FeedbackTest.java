@@ -122,8 +122,6 @@ class FeedbackTest {
                         List.of('w', '.', '.', 'r', 'd'),
                         // Expected hint
                         List.of('w', 'o', '.', 'r', 'd'))
-
-                //Arguments.of(List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('w', '.', '.', 'r', 'd'))
         );
 
     }
