@@ -75,20 +75,40 @@ class FeedbackTest {
     @ParameterizedTest
     @MethodSource("provideHintsForGiveHint")
     @DisplayName("provide a hint based on the previous hint, guessedWord and word to guess")
-    List<Character> giveHint() {
+    void giveHint(String attempt, List<LetterFeedback> letterFeedbackList, List<Character> expectedHint) {
         // Given
-        Feedback feedback = new Feedback("weird", List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        Feedback feedback = new Feedback(attempt, letterFeedbackList);
         // When
         List<Character> hint = feedback.giveHint(null, "woord");
         // Then
-
-
+        assertEquals(expectedHint, hint);
     }
 
     private static Stream<Arguments> provideHintsForGiveHint() {
         return Stream.of(
-                Arguments.of(List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('.', '.', '.', 'r', 'd'), List.of('w', '.', '.', 'r', 'd')),
-                Arguments.of(List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('w', '.', '.', 'r', 'd')),
+                Arguments.of(
+                        // Guessed word
+                        "weird",
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT),
+                        // Expected hint
+                        List.of('w', '.', '.', 'r', 'd')),
+                Arguments.of(
+                        // Guessed word
+                        "weird",
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT),
+                        // Expected hint
+                        List.of('w', '.', '.', 'r', 'd')),
+                Arguments.of(
+                        // Guessed word
+                        "woird",
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT),
+                        // Expected hint
+                        List.of('w', 'o', '.', 'r', 'd'))
+
+                //Arguments.of(List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('w', '.', '.', 'r', 'd'))
         );
 
     }
