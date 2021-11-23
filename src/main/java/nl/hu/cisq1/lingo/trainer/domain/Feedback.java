@@ -40,7 +40,7 @@ public class Feedback {
                 .allMatch(letterFeedback -> letterFeedback.equals(LetterFeedback.CORRECT));
     }
 
-    public boolean isValid(){
+    public boolean isGuessValid(){
         return letterFeedbackList
                 .stream()
                 .noneMatch(letterFeedback -> letterFeedback.equals(LetterFeedback.INVALID));

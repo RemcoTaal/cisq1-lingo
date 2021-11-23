@@ -38,7 +38,7 @@ class FeedbackTest {
         // When
         Feedback feedback = new Feedback("weird", List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
         // Then
-        assertTrue(feedback.isValid());
+        assertTrue(feedback.isGuessValid());
     }
 
     @Test
@@ -47,7 +47,7 @@ class FeedbackTest {
         // When
         Feedback feedback = new Feedback("woordt", List.of(LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID));
         // Then
-        assertFalse(feedback.isValid());
+        assertFalse(feedback.isGuessValid());
     }
 
     @Test
