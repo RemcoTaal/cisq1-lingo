@@ -3,6 +3,7 @@ package nl.hu.cisq1.lingo.trainer.domain;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidFeedbackException;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,13 +52,32 @@ public class Feedback {
     }
 
     public List<Character> giveHint(List<Character> previousHint, String wordToGuess){
-        List<Character> hint = new ArrayList<>();
-
-        if (previousHint != null) {
-            hint = previousHint;
+        // If there was no previous hint make a hint with the first character revealed
+        if (previousHint == null) {
+            previousHint = giveFirstHint(wordToGuess);
         }
 
+        // Make a new arraylist so it will be mutable
+        List<Character> newHint = new ArrayList<>(previousHint);
+
+        // Loop over the length of the word ans compare to the given feedback
         for (int i = 0; i < wordToGuess.length(); i++){
+            if (letterFeedbackList.get(i) == LetterFeedback.CORRECT && previousHint.get(i) == '.'){
+                newHint.set(i, wordToGuess.charAt(i));
+            }
+        }
+
+        return newHint;
+    }
+
+    public List<Character> giveFirstHint(String wordToGuess){
+        // Create a new array
+        List<Character> hint = new ArrayList<>();
+        // Add the first character of the word to guess to the array
+        hint.add(wordToGuess.charAt(0));
+
+        // Loop over the length of the word started from index 1, so the second character
+        for (int i = 1; i < wordToGuess.length(); i++){
             if (letterFeedbackList.get(i) == LetterFeedback.CORRECT){
                 hint.add(wordToGuess.charAt(i));
             }
