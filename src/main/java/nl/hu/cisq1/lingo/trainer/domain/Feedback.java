@@ -1,6 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidFeedbackException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidHintException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +51,18 @@ public class Feedback {
         return attempt.length() == letterFeedbackList.size();
     }
 
-    public List<Character> giveHint(List<Character> previousHint, String wordToGuess){
+    public List<Character> giveHint(List<Character> previousHint, String wordToGuess) throws InvalidHintException{
         // If there was no previous hint make a hint with the first character revealed
         if (previousHint == null) {
             previousHint = giveFirstHint(wordToGuess);
+        }
+        // Throw exception if previoushint length does not match word to guess length or letterfeedback list size
+        if (previousHint.size() != letterFeedbackList.size()) {
+            throw InvalidHintException.wrongLetterFeedbackListAndWordToGuessLength(letterFeedbackList, wordToGuess);
+        }
+        // Throw exception if word to guess length does not match the letterfeedback list size
+        if (wordToGuess.length() != letterFeedbackList.size()) {
+            throw InvalidHintException.wrongLetterFeedbackListAndWordToGuessLength(letterFeedbackList, wordToGuess);
         }
 
         // Make a new arraylist so it will be mutable

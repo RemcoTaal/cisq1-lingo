@@ -1,6 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidFeedbackException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidHintException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -82,6 +83,44 @@ class FeedbackTest {
         List<Character> hint = feedback.giveHint(previousHint, "woord");
         // Then
         assertEquals(expectedHint, hint);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideInvalidHintsForGiveHint")
+    @DisplayName("provide a invalid hint ")
+    void InvalidHint(List<LetterFeedback> letterFeedbackList, List<Character> previousHint) {
+        // Given
+        Feedback feedback = new Feedback("waard", letterFeedbackList);
+        // Then
+        assertThrows(
+                InvalidHintException.class,
+                () -> feedback.giveHint(previousHint, "woord")
+        );
+    }
+
+    private static Stream<Arguments> provideInvalidHintsForGiveHint() {
+        return Stream.of(
+                Arguments.of(
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT),
+                        // Previous hint
+                        List.of('w', '.', '.', '.')),
+                Arguments.of(
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT),
+                        // Previous hint
+                        List.of('w', '.', '.', '.', '.', '.')),
+                Arguments.of(
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT),
+                        // Previous hint
+                        List.of('.', '.', 'r', 'd')),
+                Arguments.of(
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT),
+                        // Previous hint
+                        List.of('w', '.', '.', 'r', 'd', 't'))
+                );
     }
 
     private static Stream<Arguments> provideHintsForGiveHint() {
