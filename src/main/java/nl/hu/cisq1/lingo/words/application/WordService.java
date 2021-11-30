@@ -21,4 +21,10 @@ public class WordService {
                 .orElseThrow(() -> new WordLengthNotSupportedException(length))
                 .getValue();
     }
+
+    public boolean wordExists(String value) {
+        return this.wordRepository
+                .findWordByValue(value)
+                .isPresent();
+    }
 }
