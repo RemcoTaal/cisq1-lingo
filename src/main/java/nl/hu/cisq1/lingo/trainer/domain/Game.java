@@ -4,15 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    List<Round> roundHistory = new ArrayList<>();
+    List<Round> rounds = new ArrayList<>();
     Round currentRound;
     GameStatus status;
 
-
     public static Game playing(String wordToGuess) {
         Game game = new Game();
-        game.currentRound = new Round(wordToGuess);
+        Round round = new Round(wordToGuess);
+        game.addRound(round);
+        game.currentRound = round;
         game.status = GameStatus.PLAYING;
+        return game;
+    }
+
+    public static Game waitingForRound(String wordToGuess) {
+        Game game = playing(wordToGuess);
+        game.currentRound.guess("waard");
+        game.currentRound.guess("wiird");
+        game.currentRound.guess("woord");
+        game.status = GameStatus.WAITING_FOR_ROUND;
         return game;
     }
 
@@ -30,25 +40,37 @@ public class Game {
         if (this.status != GameStatus.WAITING_FOR_ROUND){
             // TODO throw new exception still active round
         }
-        currentRound = new Round(wordToGuess);
+        Round round = new Round(wordToGuess);
+        this.addRound(round);
+        currentRound = round;
         this.status = GameStatus.PLAYING;
     }
 
     public void guess(String guessedWord){
+        if (this.status != GameStatus.PLAYING){
+            // TODO throw exception cant guess when not playing
+        }
         currentRound.guess(guessedWord);
-        this.addRoundToHistory(currentRound);
+        if (currentRound.isWordGuessed) {
+            this.addRound(currentRound);
+            this.currentRound = null;
+            this.status = GameStatus.WAITING_FOR_ROUND;
+        }
     }
 
-    public void addRoundToHistory(Round round){
-        this.roundHistory.add(round);
+    public void addRound(Round round){
+        this.rounds.add(round);
     }
 
-    public List<Round> getRoundHistory() {
-        return roundHistory;
+    public List<Round> getRounds() {
+        return rounds;
     }
 
     public Progress showProgress(){
-        return new Progress(1, List.of('t'), 1);
+        int score = calculateScore();
+        List<Character> currentHint = currentRound.giveHint();
+        int roundNr = this.getRoundNr();
+        return new Progress(score, currentHint, roundNr);
     }
 
     public boolean isPlayerEliminated(){
@@ -63,6 +85,15 @@ public class Game {
         return this.currentRound.getCurrentWordLength() + 1;
     }
 
+    public int calculateScore(){
+        int score = 0;
+        for (Round round : rounds){
+            score += 5 * (5 - round.getAttempts()) + 5;
+        }
+        return score;
+    }
 
-
+    public int getRoundNr(){
+        return this.rounds.size();
+    }
 }

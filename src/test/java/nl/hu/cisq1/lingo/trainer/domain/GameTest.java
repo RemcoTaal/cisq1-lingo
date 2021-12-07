@@ -34,9 +34,9 @@ class GameTest {
     @Test
     void addRoundToHistory() {
         // When
-        game.addRoundToHistory(round);
+        game.addRound(round);
         // Then
-        assertEquals(List.of(round), game.getRoundHistory());
+        assertEquals(List.of(round), game.getRounds());
     }
 
     @Test
@@ -79,5 +79,47 @@ class GameTest {
         int nextWordLength = game.provideNextWordLength();
         // Then
         assertEquals(6, nextWordLength);
+    }
+
+    @Test
+    void getRoundNr() {
+        // Given
+        Game game = Game.playing("woord");
+        // When
+        int roundNr = game.getRoundNr();
+        // Then
+        assertEquals(1, roundNr);
+    }
+
+    @Test
+    void calculateScore() {
+        // Given
+        Round round1 = new Round("woord");
+        round1.guess("waard");
+        round1.guess("woord");
+        game.addRound(round1);
+        Round round2 = new Round("anders");
+        round2.guess("actief");
+        round2.guess("aanzet");
+        round2.guess("afloop");
+        round2.guess("anders");
+        game.addRound(round2);
+        // When
+        int score = game.calculateScore();
+        // Then
+        assertEquals(30, score);
+    }
+
+    @Test
+    void ShowProgress() {
+        // Given
+        Game game = Game.waitingForRound("woord");
+        Progress expectedProgress = new Progress(15, List.of('w', '.', '.', '.', '.'), 1);
+        // When
+        Progress progress = game.showProgress();
+        // Then
+        assertEquals(expectedProgress, progress);
+
+
     }
 }

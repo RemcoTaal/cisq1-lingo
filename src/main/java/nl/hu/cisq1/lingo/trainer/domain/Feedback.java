@@ -35,30 +35,10 @@ public class Feedback {
         return new Feedback(attempt, letterFeedbackList);
     }
 
-    public boolean isWordGuessed(){
-        return letterFeedbackList
-                .stream()
-                .allMatch(letterFeedback -> letterFeedback.equals(LetterFeedback.CORRECT));
-    }
-
-    public boolean isGuessValid(){
-        return letterFeedbackList
-                .stream()
-                .noneMatch(letterFeedback -> letterFeedback.equals(LetterFeedback.INVALID));
-    }
-
-    public boolean isSameLength(String attempt, List<LetterFeedback> letterFeedbackList){
-        return attempt.length() == letterFeedbackList.size();
-    }
-
-    public List<Character> giveHint(List<Character> previousHint, String wordToGuess) throws InvalidHintException{
-        // If there was no previous hint make a hint with the first character revealed
-        if (previousHint == null) {
-            previousHint = giveFirstHint(wordToGuess);
-        }
+    public List<Character> giveHint(List<Character> previousHint, String wordToGuess) throws InvalidHintException {
         // Throw exception if previoushint length does not match word to guess length or letterfeedback list size
         if (previousHint.size() != letterFeedbackList.size()) {
-            throw InvalidHintException.wrongLetterFeedbackListAndWordToGuessLength(letterFeedbackList, wordToGuess);
+            throw InvalidHintException.wrongPreviousHintAndLetterFeedbackListLength(previousHint, letterFeedbackList);
         }
         // Throw exception if word to guess length does not match the letterfeedback list size
         if (wordToGuess.length() != letterFeedbackList.size()) {
@@ -78,25 +58,21 @@ public class Feedback {
         return newHint;
     }
 
-    public List<Character> giveFirstHint(String wordToGuess){
-        // Create a new array
-        List<Character> hint = new ArrayList<>();
-        // Add the first character of the word to guess to the array
-        hint.add(wordToGuess.charAt(0));
-
-        // Loop over the length of the word starting from index 1
-        for (int i = 1; i < wordToGuess.length(); i++){
-            if (letterFeedbackList.get(i) == LetterFeedback.CORRECT){
-                hint.add(wordToGuess.charAt(i));
-            }
-            else {
-                hint.add('.');
-            }
-        }
-        return hint;
+    public boolean isWordGuessed(){
+        return letterFeedbackList
+                .stream()
+                .allMatch(letterFeedback -> letterFeedback.equals(LetterFeedback.CORRECT));
     }
 
+    public boolean isGuessValid(){
+        return letterFeedbackList
+                .stream()
+                .noneMatch(letterFeedback -> letterFeedback.equals(LetterFeedback.INVALID));
+    }
 
+    public boolean isSameLength(String attempt, List<LetterFeedback> letterFeedbackList){
+        return attempt.length() == letterFeedbackList.size();
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -117,5 +93,9 @@ public class Feedback {
                 "attempt='" + attempt + '\'' +
                 ", letterFeedbackList=" + letterFeedbackList +
                 '}';
+    }
+
+    public List<LetterFeedback> getLetterFeedbackList() {
+        return letterFeedbackList;
     }
 }

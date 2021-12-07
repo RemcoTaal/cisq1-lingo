@@ -1,6 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidHintException;
 import nl.hu.cisq1.lingo.words.application.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +13,9 @@ import java.util.stream.Stream;
 public class Round {
     private String wordToGuess;
     private final List<Feedback> feedbackHistory = new ArrayList<>();
+    private List<Character> previousHint = new ArrayList<>();
     private int attempts;
+    public boolean isWordGuessed = false;
 
     public Round() { }
 
@@ -28,6 +31,31 @@ public class Round {
         }
         Feedback feedback = giveFeedback(guessedWord);
         addFeedbackToHistory(feedback);
+        if (feedback.isWordGuessed()){
+            this.isWordGuessed = true;
+        }
+    }
+
+    public List<Character> giveHint(){
+        if (feedbackHistory.size() == 0){
+            return giveFirstHint();
+        }
+        Feedback lastFeedback = feedbackHistory.get(feedbackHistory.size() - 1);
+        return lastFeedback.giveHint(previousHint, wordToGuess);
+    }
+
+    public List<Character> giveFirstHint(){
+        // Create a new array
+        List<Character> hint = new ArrayList<>();
+        // Add the first character of the word to guess to the array
+        hint.add(wordToGuess.charAt(0));
+        // Loop over the length of the word starting from index 1
+        for (int i = 1; i < wordToGuess.length(); i++){
+            hint.add('.');
+        }
+
+        this.previousHint = hint;
+        return hint;
     }
 
     public Feedback giveFeedback(String guessedWord) {
