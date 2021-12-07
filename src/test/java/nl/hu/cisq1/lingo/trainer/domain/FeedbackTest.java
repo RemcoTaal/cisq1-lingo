@@ -88,7 +88,7 @@ class FeedbackTest {
     @ParameterizedTest
     @MethodSource("provideInvalidHintsForGiveHint")
     @DisplayName("provide a invalid hint ")
-    void InvalidHint(List<LetterFeedback> letterFeedbackList, List<Character> previousHint) {
+    void invalidHint(List<LetterFeedback> letterFeedbackList, List<Character> previousHint) {
         // Given
         Feedback feedback = new Feedback("waard", letterFeedbackList);
         // Then
@@ -145,9 +145,9 @@ class FeedbackTest {
                         List.of('w', '.', '.', 'r', 'd')),
                 Arguments.of(
                         // Guessed word
-                        "woordt",
+                        "weerd",
                         // Feedback
-                        List.of(LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID),
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT),
                         // Previous hint
                         List.of('w', '.', '.', 'r', 'd'),
                         // Expected hint
