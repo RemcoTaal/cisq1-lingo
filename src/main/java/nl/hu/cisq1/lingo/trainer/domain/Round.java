@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Round {
@@ -94,5 +95,18 @@ public class Round {
 
     public void setAttempts(int attempts) {
         this.attempts = attempts;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Round round = (Round) o;
+        return attempts == round.attempts && Objects.equals(wordToGuess, round.wordToGuess) && Objects.equals(feedbackHistory, round.feedbackHistory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(wordToGuess, feedbackHistory, attempts);
     }
 }
