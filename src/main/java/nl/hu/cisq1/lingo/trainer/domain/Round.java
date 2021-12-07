@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Round {
     private String wordToGuess;
@@ -48,19 +49,18 @@ public class Round {
         char[] guessedWordChars = guessedWord.toCharArray();
         char[] wordToGuessChars = wordToGuess.toCharArray();
 
-        for (char guessedChar : guessedWordChars){
-            for (char toGuessChar : wordToGuessChars){
-                if (guessedChar == toGuessChar){
-                    letterFeedbackList.add(LetterFeedback.CORRECT);
-                }
-                else if (wordToGuess.contains(String.valueOf(guessedChar))){
-                    letterFeedbackList.add(LetterFeedback.PRESENT);
-                }
-                else {
-                    letterFeedbackList.add(LetterFeedback.ABSENT);
-                }
+        for (int i = 0; i < wordToGuessChars.length; i++){
+            if (guessedWordChars[i] == wordToGuessChars[i]) {
+                letterFeedbackList.add(LetterFeedback.CORRECT);
+            }
+            else if (wordToGuess.contains(String.valueOf(guessedWordChars[i]))){
+                letterFeedbackList.add(LetterFeedback.PRESENT);
+            }
+            else {
+                letterFeedbackList.add(LetterFeedback.ABSENT);
             }
         }
+
         return letterFeedbackList;
     }
 
