@@ -88,7 +88,9 @@ public class Game {
     public int calculateScore(){
         int score = 0;
         for (Round round : rounds){
-            score += 5 * (5 - round.getAttempts()) + 5;
+            if (round.isWordGuessed){
+                score += 5 * (5 - round.getAttempts()) + 5;
+            }
         }
         return score;
     }

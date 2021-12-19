@@ -26,4 +26,13 @@ public class Progress {
     public int hashCode() {
         return Objects.hash(score, currentHint, roundNumber);
     }
+
+    @Override
+    public String toString() {
+        return "Progress{" +
+                "score=" + score +
+                ", currentHint=" + currentHint +
+                ", roundNumber=" + roundNumber +
+                '}';
+    }
 }

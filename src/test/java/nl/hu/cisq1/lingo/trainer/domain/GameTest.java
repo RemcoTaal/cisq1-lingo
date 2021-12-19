@@ -41,6 +41,15 @@ class GameTest {
 
     @Test
     void showProgress() {
+        // Given
+        Game game = Game.playing("woord");
+        game.guess("weten");
+        game.guess("wreed");
+        Progress expectedProgress = new Progress(0, List.of('w', '.', '.', '.', 'd'), 1);
+        // When
+        Progress progress = game.showProgress();
+        // Then
+        assertEquals(expectedProgress, progress);
     }
 
     @Test
@@ -108,18 +117,5 @@ class GameTest {
         int score = game.calculateScore();
         // Then
         assertEquals(30, score);
-    }
-
-    @Test
-    void ShowProgress() {
-        // Given
-        Game game = Game.waitingForRound("woord");
-        Progress expectedProgress = new Progress(15, List.of('w', '.', '.', '.', '.'), 1);
-        // When
-        Progress progress = game.showProgress();
-        // Then
-        assertEquals(expectedProgress, progress);
-
-
     }
 }

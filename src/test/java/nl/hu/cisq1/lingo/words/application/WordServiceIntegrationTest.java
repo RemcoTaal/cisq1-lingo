@@ -1,13 +1,19 @@
 package nl.hu.cisq1.lingo.words.application;
 
 import nl.hu.cisq1.lingo.CiTestConfiguration;
+import nl.hu.cisq1.lingo.words.data.SpringWordRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * This integration test integrates between the service layer,
@@ -39,5 +45,19 @@ class WordServiceIntegrationTest {
             // (done here for verification of student configuration)
             System.out.println("Random word: " + randomWord);
         }
+    }
+
+    @Test
+    @DisplayName("check if a word exists in the wordrepository")
+    void wordExists() {
+        String word = "woord";
+        assertTrue(this.service.wordExists(word));
+    }
+
+    @Test
+    @DisplayName("check if the word does not exist in the wordrepository")
+    void wordDoesNotExist() {
+        String word = "weird";
+        assertFalse(this.service.wordExists(word));
     }
 }

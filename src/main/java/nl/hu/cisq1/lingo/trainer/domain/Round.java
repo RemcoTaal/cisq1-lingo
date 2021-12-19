@@ -22,6 +22,7 @@ public class Round {
     public Round(String wordToGuess) {
         this.attempts = 0;
         this.wordToGuess = wordToGuess;
+        this.giveHint();
     }
 
     public void guess(String guessedWord){
