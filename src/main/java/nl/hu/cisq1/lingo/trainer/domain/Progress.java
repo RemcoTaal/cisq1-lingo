@@ -1,9 +1,10 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Progress {
+public class Progress implements Serializable {
     int score;
     List<Character> currentHint;
     int roundNumber;
@@ -12,6 +13,18 @@ public class Progress {
         this.score = score;
         this.currentHint = currentHint;
         this.roundNumber = roundNumber;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public List<Character> getCurrentHint() {
+        return currentHint;
+    }
+
+    public int getRoundNumber() {
+        return roundNumber;
     }
 
     @Override

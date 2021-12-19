@@ -12,10 +12,14 @@ import java.util.Optional;
 
 @Service
 public class TrainerService {
-    @Autowired
+
     private WordService wordService;
-    @Autowired
     private GameRepository gameRepository;
+
+    public TrainerService(WordService wordService, GameRepository gameRepository) {
+        this.wordService = wordService;
+        this.gameRepository = gameRepository;
+    }
 
     public Game startGame(){
         String wordToGuess = wordService.provideRandomWord(5);
@@ -24,11 +28,12 @@ public class TrainerService {
         return gameRepository.save(game);
     }
 
-    public void guessWord(Long gameId, String guessedWord){
-        this.gameRepository
+    public Game guessWord(Long gameId, String guessedWord){
+        Game game = this.gameRepository
                 .findById(gameId)
-                .orElseThrow(() -> new EntityNotFoundException("Game note found"))
-                .guess(guessedWord);
+                .orElseThrow(() -> new EntityNotFoundException("Game note found"));
+        game.guess(guessedWord);
+        return game;
     }
 
     public Progress getProgress(Long gameId){
