@@ -1,11 +1,27 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Game {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @OneToMany
+    @JoinColumn
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     List<Round> rounds = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn
     Round currentRound;
+
+    @Enumerated(EnumType.STRING)
     GameStatus status;
 
     public static Game playing(String wordToGuess) {

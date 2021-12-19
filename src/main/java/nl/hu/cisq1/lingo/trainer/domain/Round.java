@@ -1,20 +1,38 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.trainer.data.converters.HintConverter;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidHintException;
 import nl.hu.cisq1.lingo.words.application.WordService;
+import org.hibernate.annotations.Cascade;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+@Entity
 public class Round {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column
     private String wordToGuess;
+
+    @OneToMany
+    @JoinColumn
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private final List<Feedback> feedbackHistory = new ArrayList<>();
+
+    @Convert(converter = HintConverter.class)
     private List<Character> previousHint = new ArrayList<>();
+
+    @Column
     private int attempts;
+
+    @Column
     public boolean isWordGuessed = false;
 
     public Round() { }

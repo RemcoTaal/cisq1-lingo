@@ -1,15 +1,26 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.trainer.data.converters.LetterFeedbackConverter;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidFeedbackException;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidHintException;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Feedback {
-    private final String attempt;
-    private final List<LetterFeedback> letterFeedbackList;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String attempt;
+
+    @Convert(converter = LetterFeedbackConverter.class)
+    private List<LetterFeedback> letterFeedbackList;
+
+    public Feedback() {
+    }
 
     public Feedback(String attempt, List<LetterFeedback> letterFeedbackList){
         if (!isSameLength(attempt, letterFeedbackList)) {
