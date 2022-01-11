@@ -29,6 +29,17 @@ public class TrainerService {
         return game.showProgress();
     }
 
+    public Progress startNewRound(Long gameId){
+        Game game = this.gameRepository
+                .findById(gameId)
+                .orElseThrow(() -> new EntityNotFoundException("Game not found"));
+        int wordLength = game.provideNextWordLength();
+        String wordToGuess = wordService.provideRandomWord(wordLength);
+        game.startNewRound(wordToGuess);
+        gameRepository.save(game);
+        return game.showProgress();
+    }
+
     public Progress guessWord(Long gameId, String guessedWord){
         Game game = this.gameRepository
                 .findById(gameId)

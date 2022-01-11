@@ -25,6 +25,11 @@ public class TrainerController {
         return trainerService.startGame();
     }
 
+    @PostMapping(value = "/{id}/round", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Progress startNewRound(@PathVariable Long id) {
+        return trainerService.startNewRound(id);
+    }
+
     @PostMapping(value = "/{id}/guess", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Progress guess(@PathVariable Long id, @RequestBody Map<String, String> json) {
         return trainerService.guessWord(id, json.get("guessedWord"));

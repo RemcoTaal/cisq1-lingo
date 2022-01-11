@@ -76,7 +76,6 @@ public class Game {
         }
         currentRound.guess(guessedWord);
         if (currentRound.isWordGuessed) {
-            this.currentRound = null;
             this.status = GameStatus.WAITING_FOR_ROUND;
         }
     }

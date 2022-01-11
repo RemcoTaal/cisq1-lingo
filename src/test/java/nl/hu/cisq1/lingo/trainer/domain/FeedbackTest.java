@@ -87,14 +87,27 @@ class FeedbackTest {
 
     @ParameterizedTest
     @MethodSource("provideInvalidHintsForGiveHint")
-    @DisplayName("provide a invalid hint ")
-    void invalidHint(List<LetterFeedback> letterFeedbackList, List<Character> previousHint) {
+    @DisplayName("provide a invalid hint where the previous hint does not match the length of the feedback list ")
+    void previousHintAndFeedbackListNotSameLength(List<LetterFeedback> letterFeedbackList, List<Character> previousHint) {
         // Given
         Feedback feedback = new Feedback("waard", letterFeedbackList);
         // Then
         assertThrows(
                 InvalidHintException.class,
                 () -> feedback.giveHint(previousHint, "woord")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideLetterFeedbackAndWordToGuess")
+    @DisplayName("provide feedback list and word to guess that does not match in length ")
+    void wordToGuessAndFeedbackListNotSameLength(String wordToGuess, List<LetterFeedback> letterFeedbackList) {
+        // Given
+        Feedback feedback = new Feedback("waarde", letterFeedbackList);
+        // Then
+        assertThrows(
+                InvalidHintException.class,
+                () -> feedback.giveHint(List.of('w', '.', '.', '.', '.', '.'), wordToGuess)
         );
     }
 
@@ -163,5 +176,34 @@ class FeedbackTest {
                         List.of('w', 'o', '.', 'r', 'd'))
         );
 
+    }
+
+    private static Stream<Arguments> provideLetterFeedbackAndWordToGuess() {
+        return Stream.of(
+                Arguments.of(
+                        // Guessed word
+                        "woord",
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.PRESENT, LetterFeedback.ABSENT, LetterFeedback.ABSENT)
+                ),
+                Arguments.of(
+                        // Guessed word
+                        "waard",
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.ABSENT)
+                ),
+                Arguments.of(
+                        // Guessed word
+                        "weerd",
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.ABSENT)
+                ),
+                Arguments.of(
+                        // Guessed word
+                        "wokte",
+                        // Feedback
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.ABSENT)
+                )
+        );
     }
 }
