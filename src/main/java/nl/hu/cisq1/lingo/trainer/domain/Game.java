@@ -1,5 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.trainer.domain.exception.ActiveRoundException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.NoActiveRoundException;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -27,12 +29,11 @@ public class Game {
     public static Game playing(String wordToGuess) {
         Game game = new Game();
         game.startNewRound(wordToGuess);
-        game.status = GameStatus.PLAYING;
         return game;
     }
 
-    public static Game waitingForRound(String wordToGuess) {
-        Game game = playing(wordToGuess);
+    public static Game waitingForRound() {
+        Game game = playing("woord");
         game.currentRound.guess("waard");
         game.currentRound.guess("wiird");
         game.currentRound.guess("woord");
@@ -61,7 +62,7 @@ public class Game {
 
     public void startNewRound(String wordToGuess){
         if (this.status != GameStatus.WAITING_FOR_ROUND){
-            // TODO throw new exception still active round
+            throw ActiveRoundException.activeRound();
         }
         Round round = new Round(wordToGuess);
         this.addRound(round);
@@ -71,7 +72,7 @@ public class Game {
 
     public void guess(String guessedWord){
         if (this.status != GameStatus.PLAYING){
-            // TODO throw exception cant guess when not playing
+            throw NoActiveRoundException.noActiveRound();
         }
         currentRound.guess(guessedWord);
         if (currentRound.isWordGuessed) {

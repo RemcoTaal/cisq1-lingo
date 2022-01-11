@@ -1,8 +1,12 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.trainer.domain.exception.ActiveRoundException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.NoActiveRoundException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Executable;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,31 +16,48 @@ class GameTest {
     private Game game;
     private Round round;
 
-    @BeforeEach
-    void init(){
-        // Given
-        this.game = new Game();
-        this.round = new Round("woord");
-    }
-
     @Test
+    @DisplayName("start a new round when")
     void startNewRound() {
+        // Given
+        Game game = new Game();
+        Round expectedRound = new Round("woord");
         // When
         game.startNewRound("woord");
         // Then
-        assertEquals(round, game.currentRound);
+        assertEquals(expectedRound, game.currentRound);
     }
 
     @Test
-    void guess() {
+    @DisplayName("try to start new round when there is an active round")
+    void startNewRoundWhenActiveRound() {
+        // Given
+        Game game = Game.playing("woord");
+        // When Then
+        assertThrows(
+                ActiveRoundException.class,
+                () -> game.startNewRound("woord"));
+    }
+
+    @Test
+    void guessWhenNoActiveRound() {
+        // Given
+        Game game = Game.waitingForRound();
+        // When Then
+        assertThrows(
+                NoActiveRoundException.class,
+                () -> game.guess("whatever"));
     }
 
     @Test
     void addRoundToHistory() {
+        // Given
+        Game game = new Game();
+        Round expectedRound = new Round("woord");
         // When
-        game.addRound(round);
+        game.addRound(expectedRound);
         // Then
-        assertEquals(List.of(round), game.getRounds());
+        assertEquals(List.of(expectedRound), game.getRounds());
     }
 
     @Test
@@ -62,7 +83,9 @@ class GameTest {
 
     @Test
     void playerIsNotEliminated() {
-        // Then
+        // Given
+        Game game = new Game();
+        // When Then
         assertFalse(game.isPlayerEliminated());
     }
 
@@ -76,7 +99,9 @@ class GameTest {
 
     @Test
     void isNotPLaying() {
-        // Then
+        // Given
+        Game game = new Game();
+        // When Then
         assertFalse(game.isPlaying());
     }
 
@@ -103,6 +128,7 @@ class GameTest {
     @Test
     void calculateScore() {
         // Given
+        Game game = new Game();
         Round round1 = new Round("woord");
         round1.guess("waard");
         round1.guess("woord");
