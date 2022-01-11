@@ -26,9 +26,7 @@ public class Game {
 
     public static Game playing(String wordToGuess) {
         Game game = new Game();
-        Round round = new Round(wordToGuess);
-        game.addRound(round);
-        game.currentRound = round;
+        game.startNewRound(wordToGuess);
         game.status = GameStatus.PLAYING;
         return game;
     }
@@ -39,6 +37,15 @@ public class Game {
         game.currentRound.guess("wiird");
         game.currentRound.guess("woord");
         game.status = GameStatus.WAITING_FOR_ROUND;
+        return game;
+    }
+
+    public static Game withProgress() {
+        Game game = playing("woord");
+        game.guess("woord");
+        game.startNewRound("worden");
+        game.guess("worden");
+        game.startNewRound("schacht");
         return game;
     }
 
@@ -68,7 +75,6 @@ public class Game {
         }
         currentRound.guess(guessedWord);
         if (currentRound.isWordGuessed) {
-            this.addRound(currentRound);
             this.currentRound = null;
             this.status = GameStatus.WAITING_FOR_ROUND;
         }

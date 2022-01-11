@@ -13,27 +13,29 @@ import java.util.Optional;
 @Service
 public class TrainerService {
 
-    private WordService wordService;
-    private GameRepository gameRepository;
+    private final WordService wordService;
+    private final GameRepository gameRepository;
 
     public TrainerService(WordService wordService, GameRepository gameRepository) {
         this.wordService = wordService;
         this.gameRepository = gameRepository;
     }
 
-    public Game startGame(){
+    public Progress startGame(){
         String wordToGuess = wordService.provideRandomWord(5);
         Game game = new Game();
         game.startNewRound(wordToGuess);
-        return gameRepository.save(game);
+        gameRepository.save(game);
+        return game.showProgress();
     }
 
-    public Game guessWord(Long gameId, String guessedWord){
+    public Progress guessWord(Long gameId, String guessedWord){
         Game game = this.gameRepository
                 .findById(gameId)
-                .orElseThrow(() -> new EntityNotFoundException("Game note found"));
+                .orElseThrow(() -> new EntityNotFoundException("Game not found"));
         game.guess(guessedWord);
-        return game;
+        this.gameRepository.save(game);
+        return game.showProgress();
     }
 
     public Progress getProgress(Long gameId){
