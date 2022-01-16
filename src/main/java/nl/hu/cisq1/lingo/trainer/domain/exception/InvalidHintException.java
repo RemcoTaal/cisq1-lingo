@@ -10,10 +10,6 @@ public class InvalidHintException extends RuntimeException {
         super(message);
     }
 
-    public static InvalidHintException wrongPreviousHintAndWordToGuessLength(List<Character> previousHint, String wordToGuess) {
-        return new InvalidHintException(MessageFormat.format("previous hint length: {0} is not the same as wordToGuess length: {1}", previousHint.size(), wordToGuess.length()));
-    }
-
     public static InvalidHintException wrongLetterFeedbackListAndWordToGuessLength(List<LetterFeedback> letterFeedbackList, String wordToGuess) {
         return new InvalidHintException(MessageFormat.format("letterfeedback list length: {0} is not the same as wordToGuess length: {1}", letterFeedbackList.size(), wordToGuess.length()));
     }
