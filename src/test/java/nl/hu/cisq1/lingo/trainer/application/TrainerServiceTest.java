@@ -3,6 +3,7 @@ package nl.hu.cisq1.lingo.trainer.application;
 import nl.hu.cisq1.lingo.trainer.data.GameRepository;
 import nl.hu.cisq1.lingo.trainer.domain.Game;
 import nl.hu.cisq1.lingo.trainer.domain.Progress;
+import nl.hu.cisq1.lingo.trainer.domain.exception.ActiveRoundException;
 import nl.hu.cisq1.lingo.words.application.WordService;
 import nl.hu.cisq1.lingo.words.domain.Word;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.lang.reflect.Executable;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -79,5 +81,23 @@ class TrainerServiceTest {
                 Arguments.of("baart", List.of('b', '.', '.', '.', '.')),
                 Arguments.of("cupje", List.of('c', '.', '.', '.', '.'))
         );
+    }
+
+    @Test
+    void startNewRound() {
+        // Given
+        Game game = Game.waitingForRound();
+        WordService mockService = mock(WordService.class);
+            when(mockService.provideRandomWord(6))
+                    .thenReturn((new Word("aspect")).getValue());
+        GameRepository mockRepository = mock(GameRepository.class);
+                when(mockRepository.findById(1L))
+                        .thenReturn(Optional.of(game));
+        Progress expectedResult = new Progress(15, List.of('a', '.', '.', '.', '.', '.'), 2);
+        // When
+        TrainerService service = new TrainerService(mockService, mockRepository);
+        Progress result = service.startNewRound(1L);
+        // Then
+        assertEquals(expectedResult, result);
     }
 }
