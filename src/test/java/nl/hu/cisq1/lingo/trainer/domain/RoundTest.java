@@ -9,10 +9,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.ConditionalOnRepositoryType;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -156,5 +158,74 @@ class RoundTest {
                         // Feedback
                         List.of(LetterFeedback.PRESENT, LetterFeedback.PRESENT, LetterFeedback.PRESENT, LetterFeedback.PRESENT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.PRESENT))
                 );
+    }
+
+    @Test
+    void giveFeedback() {
+        // Given
+        Round round = new Round("woord");
+        Feedback expectedResult = new Feedback("woord", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        // When
+        Feedback result = round.giveFeedback("woord");
+        // Then
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void giveFeedbackGuessedWordIncorrectLength() {
+        // Given
+        Round round = new Round("woord");
+        Feedback expectedResult = new Feedback("woorde", List.of(LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID));
+        // When
+        Feedback result = round.giveFeedback("woorde");
+        // Then
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void giveFeedbackInvalidWord() {
+        // Given
+        Round round = new Round("woord");
+        Feedback expectedResult = new Feedback("woorde", List.of(LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID));
+        // When
+        Feedback result = round.giveFeedbackInvalidWord("woorde");
+        // Then
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void testEquals() {
+        // Given
+        Round round1 = new Round("woord");
+        Round round2 = new Round("woord");
+        // When
+        boolean result = round1.equals(round2);
+        // Then
+        assertTrue(result);
+    }
+
+    @Test
+    void testNotEquals() {
+        // Given
+        Round round1 = new Round("woord");
+        Round round2 = new Round("waard");
+        // When
+        boolean result = round1.equals(round2);
+        // Then
+        assertFalse(result);
+    }
+
+    @Test
+    void testHashCode() {
+        // Given
+        String wordToGuess = "woord";
+        List<Feedback> feedbackHistory = new ArrayList<>();
+        int attempts = 0;
+        Round round = new Round(wordToGuess);
+        int expectedResult = Objects.hash(wordToGuess, feedbackHistory, attempts);
+        // When
+        int result = round.hashCode();
+        // Then
+        assertEquals(expectedResult, result);
     }
 }

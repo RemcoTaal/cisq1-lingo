@@ -219,6 +219,7 @@ class FeedbackTest {
         assertTrue(result);
     }
 
+    @Test
     void testNotEquals() {
         // Given
         Feedback feedback1 = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
