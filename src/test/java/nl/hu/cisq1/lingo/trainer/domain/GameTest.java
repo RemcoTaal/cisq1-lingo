@@ -1,7 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import nl.hu.cisq1.lingo.trainer.domain.exception.ActiveRoundException;
-import nl.hu.cisq1.lingo.trainer.domain.exception.NoActiveRoundException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,12 +40,41 @@ class GameTest {
     }
 
     @Test
-    void guessWhenNoActiveRound() {
+    void guessWhenAttemptLimitExceeded() {
+        // Given
+        Game game = Game.playing("woord");
+        game.guess("waagt");
+        game.guess("waait");
+        game.guess("water");
+        game.guess("waakt");
+        game.guess("wegen");
+        GameStatus expectedResult = GameStatus.ELIMINATED;
+        // When
+        assertThrows(
+                InvalidAttemptException.class,
+                () -> game.guess("weten"));
+        GameStatus result = game.status;
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void guessWhenEliminated() {
+        // Given
+        Game game = Game.eliminated();
+        // When Then
+        assertThrows(
+                InvalidAttemptException.class,
+                () -> game.guess("woord")
+        );
+    }
+
+    @Test
+    void guessWhenWaitingForRound() {
         // Given
         Game game = Game.waitingForRound();
         // When Then
         assertThrows(
-                NoActiveRoundException.class,
+                InvalidAttemptException.class,
                 () -> game.guess("whatever"));
     }
 

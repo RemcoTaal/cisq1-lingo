@@ -1,7 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import nl.hu.cisq1.lingo.trainer.domain.exception.ActiveRoundException;
-import nl.hu.cisq1.lingo.trainer.domain.exception.NoActiveRoundException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -71,13 +71,29 @@ public class Game {
     }
 
     public void guess(String guessedWord){
-        if (this.status != GameStatus.PLAYING){
-            throw NoActiveRoundException.noActiveRound();
+        // Check if attempt is valid
+        switch(this.status){
+            case ELIMINATED: {
+                throw InvalidAttemptException.playerEliminated();
+            }
+            case WAITING_FOR_ROUND: {
+                throw InvalidAttemptException.noActiveRound();
+            }
         }
-        currentRound.guess(guessedWord);
-        if (currentRound.isWordGuessed) {
-            this.status = GameStatus.WAITING_FOR_ROUND;
+
+        // Try to perform the guess
+        try {
+            currentRound.guess(guessedWord);
+            if (currentRound.isWordGuessed) {
+                this.status = GameStatus.WAITING_FOR_ROUND;
+            }
+        } catch (InvalidAttemptException exception) {
+            // Set the status to elimated when attempt limit was exceeded
+            this.status = GameStatus.ELIMINATED;
+            // Re throw the exception
+            throw exception;
         }
+
     }
 
     public void addRound(Round round){
