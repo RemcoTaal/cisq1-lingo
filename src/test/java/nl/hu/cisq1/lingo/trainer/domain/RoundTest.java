@@ -2,6 +2,7 @@ package nl.hu.cisq1.lingo.trainer.domain;
 
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
 import nl.hu.cisq1.lingo.words.application.WordService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -49,6 +50,7 @@ class RoundTest {
         );
     }
 
+    @Disabled
     @Test
     void guessedWordIsCorrectlySpelled() {
         // Given
@@ -60,6 +62,7 @@ class RoundTest {
         assertTrue(result);
     }
 
+    @Disabled
     @Test
     void guessedWordIsIncorrectlySpelled() {
         //Given
