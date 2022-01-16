@@ -50,7 +50,7 @@ class WordServiceIntegrationTest {
     @Test
     @DisplayName("check if a word exists in the wordrepository")
     void wordExists() {
-        String word = "woord";
+        String word = "pizza";
         assertTrue(this.service.wordExists(word));
     }
 
