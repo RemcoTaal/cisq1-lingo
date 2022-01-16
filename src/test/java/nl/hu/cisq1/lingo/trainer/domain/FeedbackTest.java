@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -205,5 +206,61 @@ class FeedbackTest {
                         List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.ABSENT)
                 )
         );
+    }
+
+    @Test
+    void testEquals() {
+        // Given
+        Feedback feedback1 = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        Feedback feedback2 = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        // When
+        boolean result = feedback1.equals(feedback2);
+        // Then
+        assertTrue(result);
+    }
+
+    void testNotEquals() {
+        // Given
+        Feedback feedback1 = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        Feedback feedback2 = new Feedback("testing", List.of(LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        // When
+        boolean result = feedback1.equals(feedback2);
+        // Then
+        assertFalse(result);
+    }
+
+    @Test
+    void testHashCode() {
+        // Given
+        String attempt = "testing";
+        List<LetterFeedback> letterFeedbackList = List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT);
+        Feedback feedback = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        int expectedResult = Objects.hash(attempt, letterFeedbackList);
+        // When
+        int result = feedback.hashCode();
+        // Then
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void testToString() {
+        // Given
+        Feedback feedback = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        String expectedResult = "Feedback{attempt='testing', letterFeedbackList=[CORRECT, CORRECT, CORRECT, CORRECT, CORRECT, CORRECT, CORRECT]}";
+        // When
+        String result = feedback.toString();
+        // Then
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void getLetterFeedbackList() {
+        // Given
+        Feedback feedback = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        List<LetterFeedback> expectedResult = List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT);
+        // When
+        List<LetterFeedback> result = feedback.getLetterFeedbackList();
+        // Then
+        assertEquals(expectedResult, result);
     }
 }
