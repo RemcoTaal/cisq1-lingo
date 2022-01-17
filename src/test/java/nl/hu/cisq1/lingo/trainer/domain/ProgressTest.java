@@ -1,6 +1,5 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +21,7 @@ class ProgressTest {
 
     @BeforeEach
     void init() {
-        this.progress = new Progress(1L,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
+        this.progress = new Progress(1L, GameStatus.PLAYING,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
     }
 
     @ParameterizedTest
@@ -38,12 +37,12 @@ class ProgressTest {
         return Stream.of(
                 Arguments.of(
                         // Progress
-                        new Progress(1L,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
+                        new Progress(1L, GameStatus.PLAYING,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
                         0
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1L, 1, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
+                        new Progress(1L, GameStatus.PLAYING, 1, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
                         1
                 )
         );
@@ -62,12 +61,12 @@ class ProgressTest {
         return Stream.of(
                 Arguments.of(
                         // Progress
-                        new Progress(1L,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
+                        new Progress(1L, GameStatus.PLAYING,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
                         1
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1L,1, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                   // Object
+                        new Progress(1L, GameStatus.PLAYING,1, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                   // Object
                         2
                 )
         );
@@ -98,9 +97,19 @@ class ProgressTest {
         // Given
         Long expectedResult = 1L;
         // When
-        Long result = this.progress.getGameId();
+        Long result = this.progress.getId();
         // Then
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void getStatus() {
+        // Given
+        GameStatus expectedStatus = GameStatus.PLAYING;
+        // When
+        GameStatus status = this.progress.getStatus();
+        // Then
+        assertEquals(expectedStatus, status);
     }
 
     @ParameterizedTest
@@ -116,13 +125,13 @@ class ProgressTest {
         return Stream.of(
                 Arguments.of(
                         // Progress
-                        new Progress(1L,0, List.of(Feedback.valid("testing")), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1L, GameStatus.PLAYING,0, List.of(Feedback.valid("testing")), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object
                         List.of(Feedback.valid("testing"))
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1L,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1L, GameStatus.PLAYING,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object
                         List.of()
                 )
@@ -132,7 +141,7 @@ class ProgressTest {
     @Test
     void testEquals() {
         // Given
-        Progress progress = new Progress(1L,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
+        Progress progress = new Progress(1L, GameStatus.PLAYING,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
         // Then
         assertThat(progress, is(this.progress));
         assertThat(this.progress, is(this.progress));
@@ -149,45 +158,51 @@ class ProgressTest {
         return Stream.of(
                 Arguments.of(
                         // Progress
-                        new Progress(1L,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1L, GameStatus.PLAYING,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object
                         null
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1L,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1L, GameStatus.PLAYING,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object
                         new Game()
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1L, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1L, GameStatus.PLAYING, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object different gameId
-                        new Progress(2L, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
+                        new Progress(2L, GameStatus.PLAYING, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1L, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1L, GameStatus.PLAYING, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object different score
-                        new Progress(1L, 5, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
+                        new Progress(1L, GameStatus.PLAYING, 5, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1L, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1L, GameStatus.PLAYING, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object different lastFeedback
-                        new Progress(1L, 0, List.of(Feedback.valid("woord")), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
+                        new Progress(1L, GameStatus.PLAYING, 0, List.of(Feedback.valid("woord")), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1L,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1L, GameStatus.PLAYING,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object different round number
-                        new Progress(1L,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 3)
+                        new Progress(1L, GameStatus.PLAYING,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 3)
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1L, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1L, GameStatus.PLAYING, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object different current hint
-                        new Progress(1L, 0, List.of(), List.of('t', 'e', 's', 't'), 1)
+                        new Progress(1L, GameStatus.PLAYING, 0, List.of(), List.of('t', 'e', 's', 't'), 1)
+                ),
+                Arguments.of(
+                        // Progress
+                        new Progress(1L, GameStatus.PLAYING, 0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        // Object different game status
+                        new Progress(1L, GameStatus.WAITING_FOR_ROUND, 0, List.of(), List.of('t', 'e', 's', 't'), 1)
                 )
         );
     }
@@ -197,12 +212,13 @@ class ProgressTest {
     @Test
     void testHashCode() {
         // Given
-        int gameId = 1;
+        int id = 1;
+        GameStatus status = GameStatus.PLAYING;
         int score = 0;
         List<Character> hint = List.of('t', 'e', 's', 't', 'i', 'n', 'g');
         List<Feedback> feedbackHistory = List.of();
         int roundNumber = 1;
-        int expectedResult = Objects.hash(gameId, score, feedbackHistory, hint, roundNumber);
+        int expectedResult = Objects.hash(id, status, score, feedbackHistory, hint, roundNumber);
         // When
         int result = this.progress.hashCode();
         // Then
@@ -218,6 +234,4 @@ class ProgressTest {
         // Then
         assertEquals(expectedResult, result);
     }
-
-
 }

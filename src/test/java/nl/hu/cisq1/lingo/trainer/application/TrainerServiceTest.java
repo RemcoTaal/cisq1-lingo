@@ -1,10 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.application;
 
 import nl.hu.cisq1.lingo.trainer.data.GameRepository;
-import nl.hu.cisq1.lingo.trainer.domain.Feedback;
-import nl.hu.cisq1.lingo.trainer.domain.Game;
-import nl.hu.cisq1.lingo.trainer.domain.LetterFeedback;
-import nl.hu.cisq1.lingo.trainer.domain.Progress;
+import nl.hu.cisq1.lingo.trainer.domain.*;
 import nl.hu.cisq1.lingo.words.application.WordService;
 import nl.hu.cisq1.lingo.words.domain.Word;
 import org.junit.jupiter.api.DisplayName;
@@ -39,28 +36,52 @@ class TrainerServiceTest {
 
         // When
         Progress result = service.startGame();
-        Progress expectedResult = new Progress(null,0, List.of(), hint, 1);
+        Progress expectedResult = new Progress(null, null, 0, List.of(), hint, 1);
 
         // Then
         assertEquals(expectedResult, result);
     }
 
     @Test
-    void guessWord() {
+    void guessWordIncorrectlySpelled() {
         // Given
+        String attempt = "woird";
         Game game = Game.playing("woord");
-        Feedback expectedFeedback = new Feedback("woird", List.of(LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID));
+        Feedback expectedFeedback = new Feedback(attempt, List.of(LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID));
         WordService mockService = mock(WordService.class);
+        when(mockService.wordExists(attempt))
+                .thenReturn(false);
         GameRepository mockRepository = mock(GameRepository.class);
         when(mockRepository.findById(1L))
                 .thenReturn(Optional.of(game));
-
-        Progress expectedResult = new Progress(1L,0, List.of(expectedFeedback), List.of('w', '.', '.', '.', '.'), 1);
+        Progress expectedResult = new Progress(1L, GameStatus.PLAYING, 0, List.of(expectedFeedback), List.of('w', '.', '.', '.', '.'), 1);
         // When
         TrainerService service = new TrainerService(mockService, mockRepository);
-        Progress result = service.guessWord(1L, "woird");
+        Progress result = service.guessWord(1L, attempt);
         // Then
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void guessWordCorrectlySpelled() {
+        // Given
+        String attempt = "waard";
+        Game game = Game.playing("woord");
+        Feedback expectedFeedback = new Feedback(attempt, List.of(LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        WordService mockService = mock(WordService.class);
+        when(mockService.wordExists(attempt))
+                .thenReturn(true);
+        GameRepository mockRepository = mock(GameRepository.class);
+        when(mockRepository.findById(1L))
+                .thenReturn(Optional.of(game));
+        Progress expectedResult = new Progress(1L, GameStatus.PLAYING, 0, List.of(expectedFeedback), List.of('w', '.', '.', 'r', 'd'), 1);
+        // When
+        TrainerService service = new TrainerService(mockService, mockRepository);
+        Progress result = service.guessWord(1L, attempt);
+        // Then
+        assertEquals(expectedResult, result);
+
+
     }
 
     @Test
@@ -72,7 +93,7 @@ class TrainerServiceTest {
         when(mockRepository.findById(1L))
                 .thenReturn(Optional.of(game));
 
-        Progress expectedResult = new Progress(1L,50, List.of(),  List.of('s', '.', '.', '.', '.', '.', '.'), 3);
+        Progress expectedResult = new Progress(1L, GameStatus.PLAYING,50, List.of(),  List.of('s', '.', '.', '.', '.', '.', '.'), 3);
         // When
         TrainerService service = new TrainerService(mockService, mockRepository);
         Progress result = service.getProgress(1L);
@@ -98,7 +119,7 @@ class TrainerServiceTest {
         GameRepository mockRepository = mock(GameRepository.class);
                 when(mockRepository.findById(1L))
                         .thenReturn(Optional.of(game));
-        Progress expectedResult = new Progress(1L,15, List.of(), List.of('a', '.', '.', '.', '.', '.'), 2);
+        Progress expectedResult = new Progress(1L, GameStatus.WAITING_FOR_ROUND,15, List.of(), List.of('a', '.', '.', '.', '.', '.'), 2);
         // When
         TrainerService service = new TrainerService(mockService, mockRepository);
         Progress result = service.startNewRound(1L);
@@ -183,5 +204,22 @@ class TrainerServiceTest {
         TrainerService service = new TrainerService(mockService, mockRepository);
         // Then
         assertFalse(service.isCorrectlySpelled(word));
+    }
+
+    @Test
+    void testExceptionWhenGameNotFound(){
+        // Given
+        WordService mockService = mock(WordService.class);
+        GameRepository mockRepository = mock(GameRepository.class);
+        when(mockRepository.findById(1L))
+                .thenThrow(EntityNotFoundException.class);
+        TrainerService service = new TrainerService(mockService, mockRepository);
+        // When Then
+        assertThrows(
+                EntityNotFoundException.class,
+                () -> Optional
+                        .ofNullable(service.startNewRound(1L))
+                        .orElseThrow(() -> new EntityNotFoundException("Game not found"))
+        );
     }
 }

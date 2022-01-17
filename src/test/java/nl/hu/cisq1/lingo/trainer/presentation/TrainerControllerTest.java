@@ -1,6 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.presentation;
 
 import nl.hu.cisq1.lingo.trainer.application.TrainerService;
+import nl.hu.cisq1.lingo.trainer.domain.GameStatus;
 import nl.hu.cisq1.lingo.trainer.domain.Progress;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
 import nl.hu.cisq1.lingo.trainer.domain.exception.RoundException;
@@ -22,7 +23,7 @@ class TrainerControllerTest {
     @Test
     void startGame() {
         // Given
-        Progress expectedResult = new Progress(1L,0, null, List.of('w', '.', '.', '.', '.'), 1);
+        Progress expectedResult = new Progress(1L, GameStatus.PLAYING,0, null, List.of('w', '.', '.', '.', '.'), 1);
         TrainerService mockService = mock(TrainerService.class);
                 when(mockService.startGame())
                         .thenReturn(expectedResult);
@@ -36,7 +37,7 @@ class TrainerControllerTest {
     @Test
     void startNewRound() {
         // Given
-        Progress expectedResult = new Progress(1L,15, null, List.of('s', '.', '.', '.', '.', '.'), 2);
+        Progress expectedResult = new Progress(1L, GameStatus.PLAYING,15, null, List.of('s', '.', '.', '.', '.', '.'), 2);
         TrainerService mockService = mock(TrainerService.class);
                 when(mockService.startNewRound(1L))
                         .thenReturn(expectedResult);
@@ -98,7 +99,7 @@ class TrainerControllerTest {
     @Test
     void guessValid() {
         // Given
-        Progress expectedResult = new Progress(1L,15, null, List.of('s', '.', '.', '.', '.', '.'), 2);
+        Progress expectedResult = new Progress(1L, GameStatus.PLAYING,15, null, List.of('s', '.', '.', '.', '.', '.'), 2);
         String guessedWord = "woord";
         Map<String, String> requestBody = Map.of("guessedWord", guessedWord);
         TrainerService mockService = mock(TrainerService.class);
@@ -149,7 +150,7 @@ class TrainerControllerTest {
     @Test
     void getProgress() {
         // Given
-        Progress expectedResult = new Progress(1L,15, null, List.of('s', '.', '.', '.', '.', '.'), 2);
+        Progress expectedResult = new Progress(1L, GameStatus.PLAYING,15, null, List.of('s', '.', '.', '.', '.', '.'), 2);
         TrainerService mockService = mock(TrainerService.class);
         when(mockService.getProgress(1L))
                 .thenReturn(expectedResult);
@@ -158,6 +159,21 @@ class TrainerControllerTest {
         Progress result = controller.getProgress(1L);
         // Then
         assertEquals(expectedResult, result);
+    }
 
+    @Test
+    void getProgressWhenGameNotFound() {
+        // Given
+        TrainerService mockService = mock(TrainerService.class);
+        when(mockService.getProgress(1L))
+                .thenThrow(EntityNotFoundException.class);
+        HttpStatus expectedStatus = HttpStatus.NOT_FOUND;
+        // When
+        TrainerController controller = new TrainerController(mockService);
+        ResponseStatusException exception = assertThrows(
+                ResponseStatusException.class,
+                () -> controller.getProgress(1L)
+        );
+        assertEquals(expectedStatus, exception.getStatus());
     }
 }

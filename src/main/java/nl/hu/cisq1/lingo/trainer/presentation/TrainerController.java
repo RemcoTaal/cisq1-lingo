@@ -4,6 +4,7 @@ import nl.hu.cisq1.lingo.trainer.application.TrainerService;
 import nl.hu.cisq1.lingo.trainer.domain.Progress;
 import nl.hu.cisq1.lingo.trainer.domain.exception.RoundException;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,12 @@ public class TrainerController {
 
     @GetMapping(value = "/{id}/progress", produces = MediaType.APPLICATION_JSON_VALUE)
     public Progress getProgress(@PathVariable Long id) {
-        return trainerService.getProgress(id);
+        try {
+            return trainerService.getProgress(id);
+        }
+        catch (EntityNotFoundException exception){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        }
     }
 
 

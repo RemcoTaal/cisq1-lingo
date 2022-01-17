@@ -122,6 +122,7 @@ class GameTest {
         game.guess("wreed");
         Progress expectedProgress = new Progress(
                 1L,
+                GameStatus.PLAYING,
                 0,
                 List.of(
                         new Feedback("weten",
