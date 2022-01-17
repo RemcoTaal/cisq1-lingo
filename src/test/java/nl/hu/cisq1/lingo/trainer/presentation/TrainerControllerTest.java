@@ -22,7 +22,7 @@ class TrainerControllerTest {
     @Test
     void startGame() {
         // Given
-        Progress expectedResult = new Progress(0, List.of('w', '.', '.', '.', '.'), 1);
+        Progress expectedResult = new Progress(1,0, null, List.of('w', '.', '.', '.', '.'), 1);
         TrainerService mockService = mock(TrainerService.class);
                 when(mockService.startGame())
                         .thenReturn(expectedResult);
@@ -36,7 +36,7 @@ class TrainerControllerTest {
     @Test
     void startNewRound() {
         // Given
-        Progress expectedResult = new Progress(15, List.of('s', '.', '.', '.', '.', '.'), 2);
+        Progress expectedResult = new Progress(1,15, null, List.of('s', '.', '.', '.', '.', '.'), 2);
         TrainerService mockService = mock(TrainerService.class);
                 when(mockService.startNewRound(1L))
                         .thenReturn(expectedResult);
@@ -50,7 +50,6 @@ class TrainerControllerTest {
     @Test
     void startNewRoundWhenGameNotFound() {
         // Given
-        Progress expectedResult = new Progress(15, List.of('s', '.', '.', '.', '.', '.'), 2);
         TrainerService mockService = mock(TrainerService.class);
         when(mockService.startNewRound(1000L))
                 .thenThrow(EntityNotFoundException.class);
@@ -67,7 +66,6 @@ class TrainerControllerTest {
     @Test
     void startNewRoundWhenActiveRound() {
         // Given
-        Progress expectedResult = new Progress(15, List.of('s', '.', '.', '.', '.', '.'), 2);
         TrainerService mockService = mock(TrainerService.class);
         when(mockService.startNewRound(1L))
                 .thenThrow(RoundException.class);
@@ -84,7 +82,6 @@ class TrainerControllerTest {
     @Test
     void startNewRoundWhenPlayerEliminated() {
         // Given
-        Progress expectedResult = new Progress(15, List.of('s', '.', '.', '.', '.', '.'), 2);
         TrainerService mockService = mock(TrainerService.class);
         when(mockService.startNewRound(1L))
                 .thenThrow(RoundException.class);
@@ -101,7 +98,7 @@ class TrainerControllerTest {
     @Test
     void guessValid() {
         // Given
-        Progress expectedResult = new Progress(15, List.of('s', '.', '.', '.', '.', '.'), 2);
+        Progress expectedResult = new Progress(1,15, null, List.of('s', '.', '.', '.', '.', '.'), 2);
         String guessedWord = "woord";
         Map<String, String> requestBody = Map.of("guessedWord", guessedWord);
         TrainerService mockService = mock(TrainerService.class);
@@ -152,7 +149,7 @@ class TrainerControllerTest {
     @Test
     void getProgress() {
         // Given
-        Progress expectedResult = new Progress(15, List.of('s', '.', '.', '.', '.', '.'), 2);
+        Progress expectedResult = new Progress(1,15, null, List.of('s', '.', '.', '.', '.', '.'), 2);
         TrainerService mockService = mock(TrainerService.class);
         when(mockService.getProgress(1L))
                 .thenReturn(expectedResult);

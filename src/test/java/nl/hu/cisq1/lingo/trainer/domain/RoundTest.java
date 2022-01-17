@@ -293,4 +293,30 @@ class RoundTest {
         // Then
         assertThat(round1, not(round2));
     }
+
+    @ParameterizedTest
+    @MethodSource("provideRoundsWithLatestsLetterFeedbackList")
+    void getLatestLetterFeedback(Round round, List<LetterFeedback> expectedLetterFeedbackList) {
+        // When
+        List<LetterFeedback> letterFeedbackList = round.getLatestLetterFeedback();
+        // Then
+        assertThat(expectedLetterFeedbackList, is(letterFeedbackList));
+    }
+
+    private static Stream<Arguments> provideRoundsWithLatestsLetterFeedbackList() {
+        return Stream.of(
+                Arguments.of(
+                        // Round
+                        new Round("woord"),
+                        // Object
+                        null
+                ),
+                Arguments.of(
+                        // Round
+                        Round.withFeedbackHistory("woord"),
+                        // Object
+                        List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT)
+                )
+        );
+    }
 }

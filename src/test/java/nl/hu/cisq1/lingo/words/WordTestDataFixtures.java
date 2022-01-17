@@ -16,5 +16,6 @@ public class WordTestDataFixtures implements CommandLineRunner {
         this.repository.save(new Word("pizza"));
         this.repository.save(new Word("oranje"));
         this.repository.save(new Word("wanorde"));
+        this.repository.save(new Word("waard"));
     }
 }

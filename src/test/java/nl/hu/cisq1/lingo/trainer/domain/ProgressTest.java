@@ -22,7 +22,7 @@ class ProgressTest {
 
     @BeforeEach
     void init() {
-        this.progress = new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
+        this.progress = new Progress(1,0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
     }
 
     @ParameterizedTest
@@ -38,12 +38,12 @@ class ProgressTest {
         return Stream.of(
                 Arguments.of(
                         // Progress
-                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
+                        new Progress(1,0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
                         0
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
+                        new Progress(1, 1, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
                         1
                 )
         );
@@ -62,12 +62,12 @@ class ProgressTest {
         return Stream.of(
                 Arguments.of(
                         // Progress
-                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
+                        new Progress(1,0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
                         1
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(1, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                   // Object
+                        new Progress(1,1, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                   // Object
                         2
                 )
         );
@@ -96,7 +96,7 @@ class ProgressTest {
     @Test
     void testEquals() {
         // Given
-        Progress progress = new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
+        Progress progress = new Progress(1,0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
         // Then
         assertThat(progress, is(this.progress));
         assertThat(this.progress, is(this.progress));
@@ -113,33 +113,45 @@ class ProgressTest {
         return Stream.of(
                 Arguments.of(
                         // Progress
-                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1,0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object
                         null
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1,0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object
                         new Game()
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1, 0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        // Object different gameId
+                        new Progress(2, 0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
+                ),
+                Arguments.of(
+                        // Progress
+                        new Progress(1, 0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object different score
-                        new Progress(5, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
+                        new Progress(1, 5, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1, 0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        // Object different lastFeedback
+                        new Progress(1, 0, List.of(LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
+                ),
+                Arguments.of(
+                        // Progress
+                        new Progress(1,0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object different round number
-                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 3)
+                        new Progress(1,0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 3)
                 ),
                 Arguments.of(
                         // Progress
-                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        new Progress(1, 0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
                         // Object different current hint
-                        new Progress(0, List.of('t', 'e', 's', 't'), 1)
+                        new Progress(1, 0, List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT), List.of('t', 'e', 's', 't'), 1)
                 )
         );
     }
@@ -149,10 +161,12 @@ class ProgressTest {
     @Test
     void testHashCode() {
         // Given
+        int gameId = 1;
         int score = 0;
         List<Character> hint = List.of('t', 'e', 's', 't', 'i', 'n', 'g');
+        List<LetterFeedback> latestLetterFeedback = List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT);
         int roundNumber = 1;
-        int expectedResult = Objects.hash(score, hint, roundNumber);
+        int expectedResult = Objects.hash(gameId, score, latestLetterFeedback, hint, roundNumber);
         // When
         int result = this.progress.hashCode();
         // Then
@@ -162,7 +176,7 @@ class ProgressTest {
     @Test
     void testToString() {
         // Given
-        String expectedResult = "Progress{score=0, currentHint=[t, e, s, t, i, n, g], roundNumber=1}";
+        String expectedResult = "Progress{gameId=1, score=0, latestLetterFeedback=[CORRECT, CORRECT, CORRECT, CORRECT, CORRECT, CORRECT, CORRECT], currentHint=[t, e, s, t, i, n, g], roundNumber=1}";
         // When
         String result = this.progress.toString();
         // Then

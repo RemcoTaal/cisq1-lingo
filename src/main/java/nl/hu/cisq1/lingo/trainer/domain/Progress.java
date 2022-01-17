@@ -1,17 +1,20 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Progress implements Serializable {
+    int gameId;
     int score;
+    List<LetterFeedback> latestLetterFeedback;
     List<Character> currentHint;
     int roundNumber;
 
-    public Progress(int score, List<Character> currentHint, int roundNumber) {
+    public Progress(int gameId, int score, List<LetterFeedback> latestLetterFeedback, List<Character> currentHint, int roundNumber) {
+        this.gameId = gameId;
         this.score = score;
+        this.latestLetterFeedback = latestLetterFeedback;
         this.currentHint = currentHint;
         this.roundNumber = roundNumber;
     }
@@ -33,18 +36,20 @@ public class Progress implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Progress progress = (Progress) o;
-        return score == progress.score && roundNumber == progress.roundNumber && Objects.equals(currentHint, progress.currentHint);
+        return gameId == progress.gameId && score == progress.score && Objects.equals(latestLetterFeedback, progress.latestLetterFeedback) && roundNumber == progress.roundNumber && Objects.equals(currentHint, progress.currentHint);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(score, currentHint, roundNumber);
+        return Objects.hash(gameId, score, latestLetterFeedback, currentHint, roundNumber);
     }
 
     @Override
     public String toString() {
         return "Progress{" +
-                "score=" + score +
+                "gameId=" + gameId +
+                ", score=" + score +
+                ", latestLetterFeedback=" + latestLetterFeedback +
                 ", currentHint=" + currentHint +
                 ", roundNumber=" + roundNumber +
                 '}';

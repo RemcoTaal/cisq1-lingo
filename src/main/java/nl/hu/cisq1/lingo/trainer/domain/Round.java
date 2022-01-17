@@ -44,6 +44,13 @@ public class Round {
         this.giveHint();
     }
 
+    public static Round withFeedbackHistory(String wordToGuess) {
+        Round round = new Round(wordToGuess);
+        Feedback feedback = Feedback.valid("woord");
+        round.feedbackHistory = List.of(feedback);
+        return round;
+    }
+
     public static Round differentAttempt(String wordToGuess) {
         Round round = new Round(wordToGuess);
         round.attempts = 2;
@@ -135,6 +142,13 @@ public class Round {
 
     public List<Feedback> getFeedbackHistory(){
         return this.feedbackHistory;
+    }
+
+    public List<LetterFeedback> getLatestLetterFeedback() {
+        if (this.feedbackHistory.size() == 0){
+            return null;
+        }
+        return this.feedbackHistory.get(this.feedbackHistory.size() - 1).getLetterFeedbackList();
     }
 
     public boolean guessedWordIsCorrectlySpelled(String guessedWord){

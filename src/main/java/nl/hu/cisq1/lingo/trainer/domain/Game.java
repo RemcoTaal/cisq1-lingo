@@ -28,6 +28,7 @@ public class Game {
 
     public static Game playing(String wordToGuess) {
         Game game = new Game();
+        game.id = 1L;
         game.startNewRound(wordToGuess);
         return game;
     }
@@ -52,6 +53,7 @@ public class Game {
 
     public static Game eliminated(){
         Game game = new Game();
+        game.id = 1L;
         game.status = GameStatus.ELIMINATED;
         return game;
     }
@@ -92,7 +94,11 @@ public class Game {
             // Re throw the exception
             throw exception;
         }
+    }
 
+    public void guessIncorrectlySpelledWord(String guessedWord){
+        currentRound.setAttempts(currentRound.getAttempts() + 1);
+        currentRound.giveFeedbackInvalidWord(guessedWord);
     }
 
     public void addRound(Round round){
@@ -104,10 +110,12 @@ public class Game {
     }
 
     public Progress showProgress(){
+        int id = this.id.intValue();
         int score = calculateScore();
         List<Character> currentHint = currentRound.giveHint();
+        List<LetterFeedback> lastLetterFeedback = currentRound.getLatestLetterFeedback();
         int roundNr = this.getRoundNr();
-        return new Progress(score, currentHint, roundNr);
+        return new Progress(id, score, lastLetterFeedback, currentHint, roundNr);
     }
 
     public boolean isPlayerEliminated(){
