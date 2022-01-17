@@ -38,7 +38,7 @@ class TrainerServiceTest {
 
         // When
         Progress result = service.startGame();
-        Progress expectedResult = new Progress(1,0, null, hint, 1);
+        Progress expectedResult = new Progress(null,0, List.of(), hint, 1);
 
         // Then
         assertEquals(expectedResult, result);
@@ -53,7 +53,7 @@ class TrainerServiceTest {
         when(mockRepository.findById(1L))
                 .thenReturn(Optional.of(game));
 
-        Progress expectedResult = new Progress(1,0, null, List.of('w', '.', '.', '.', '.'), 1);
+        Progress expectedResult = new Progress(1L,0, List.of(), List.of('w', '.', '.', '.', '.'), 1);
         // When
         TrainerService service = new TrainerService(mockService, mockRepository);
         Progress result = service.guessWord(1L, "waard");
@@ -70,7 +70,7 @@ class TrainerServiceTest {
         when(mockRepository.findById(1L))
                 .thenReturn(Optional.of(game));
 
-        Progress expectedResult = new Progress(1,50, null,  List.of('s', '.', '.', '.', '.', '.', '.'), 3);
+        Progress expectedResult = new Progress(1L,50, List.of(),  List.of('s', '.', '.', '.', '.', '.', '.'), 3);
         // When
         TrainerService service = new TrainerService(mockService, mockRepository);
         Progress result = service.getProgress(1L);
@@ -96,7 +96,7 @@ class TrainerServiceTest {
         GameRepository mockRepository = mock(GameRepository.class);
                 when(mockRepository.findById(1L))
                         .thenReturn(Optional.of(game));
-        Progress expectedResult = new Progress(1,15, null, List.of('a', '.', '.', '.', '.', '.'), 2);
+        Progress expectedResult = new Progress(1L,15, List.of(), List.of('a', '.', '.', '.', '.', '.'), 2);
         // When
         TrainerService service = new TrainerService(mockService, mockRepository);
         Progress result = service.startNewRound(1L);

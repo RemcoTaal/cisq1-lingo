@@ -110,12 +110,11 @@ public class Game {
     }
 
     public Progress showProgress(){
-        int id = this.id.intValue();
         int score = calculateScore();
         List<Character> currentHint = currentRound.giveHint();
-        List<LetterFeedback> lastLetterFeedback = currentRound.getLatestLetterFeedback();
+        List<Feedback> feedbackHistory = currentRound.getFeedbackHistory();
         int roundNr = this.getRoundNr();
-        return new Progress(id, score, lastLetterFeedback, currentHint, roundNr);
+        return new Progress(id, score, feedbackHistory, currentHint, roundNr);
     }
 
     public boolean isPlayerEliminated(){

@@ -23,6 +23,7 @@ public class TrainerController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public Progress startGame() {
         return trainerService.startGame();
     }

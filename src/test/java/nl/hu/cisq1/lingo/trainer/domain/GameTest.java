@@ -107,7 +107,28 @@ class GameTest {
         Game game = Game.playing("woord");
         game.guess("weten");
         game.guess("wreed");
-        Progress expectedProgress = new Progress(1,0, List.of(LetterFeedback.CORRECT, LetterFeedback.PRESENT, LetterFeedback.ABSENT, LetterFeedback.ABSENT, LetterFeedback.CORRECT), List.of('w', '.', '.', '.', 'd'), 1);
+        Progress expectedProgress = new Progress(
+                1L,
+                0,
+                List.of(
+                        new Feedback("weten",
+                                List.of(
+                                        LetterFeedback.CORRECT,
+                                        LetterFeedback.ABSENT,
+                                        LetterFeedback.ABSENT,
+                                        LetterFeedback.ABSENT,
+                                        LetterFeedback.ABSENT
+                                )
+                        ),
+                        new Feedback("wreed",
+                                List.of(
+                                        LetterFeedback.CORRECT,
+                                        LetterFeedback.PRESENT,
+                                        LetterFeedback.ABSENT,
+                                        LetterFeedback.ABSENT,
+                                        LetterFeedback.CORRECT
+                                ))),
+                List.of('w', '.', '.', '.', 'd'), 1);
         // When
         Progress progress = game.showProgress();
         // Then
