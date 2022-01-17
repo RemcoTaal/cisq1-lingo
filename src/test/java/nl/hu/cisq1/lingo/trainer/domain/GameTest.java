@@ -91,6 +91,19 @@ class GameTest {
     }
 
     @Test
+    void guessIncorrectlySpelledWord() {
+        // Given
+        Game game = Game.playing("woord");
+        int expectedAttempts = 1;
+        List<Feedback> expectedFeedbackHistory = List.of(new Feedback("wooord", List.of(LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID)));
+        // When
+        game.guessIncorrectlySpelledWord("wooord");
+        // Then
+        assertEquals(expectedAttempts, game.currentRound.getAttempts());
+        assertEquals(expectedFeedbackHistory, game.currentRound.getFeedbackHistory());
+    }
+
+    @Test
     void addRoundToHistory() {
         // Given
         Game game = new Game();

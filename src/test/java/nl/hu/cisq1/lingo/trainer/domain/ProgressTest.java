@@ -103,14 +103,30 @@ class ProgressTest {
         assertEquals(expectedResult, result);
     }
 
-    @Test
-    void getFeedbackHistory() {
-        // Given
-        List<Feedback> expectedResult = List.of();
+    @ParameterizedTest
+    @MethodSource("provideCorrectFeedbackHistory")
+    void getFeedbackHistory(Progress progress, List<Feedback> expectedFeedbackHistory) {
         // When
-        List<Feedback> result = this.progress.getFeedbackHistory();
+        List<Feedback> result = progress.getFeedbackHistory();
         // Then
-        assertEquals(expectedResult, result);
+        assertEquals(expectedFeedbackHistory, result);
+    }
+
+    private static Stream<Arguments> provideCorrectFeedbackHistory() {
+        return Stream.of(
+                Arguments.of(
+                        // Progress
+                        new Progress(1L,0, List.of(Feedback.valid("testing")), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        // Object
+                        List.of(Feedback.valid("testing"))
+                ),
+                Arguments.of(
+                        // Progress
+                        new Progress(1L,0, List.of(), List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        // Object
+                        List.of()
+                )
+        );
     }
 
     @Test

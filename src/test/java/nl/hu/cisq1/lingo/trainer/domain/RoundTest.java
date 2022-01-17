@@ -51,30 +51,6 @@ class RoundTest {
         );
     }
 
-    @Disabled
-    @Test
-    void guessedWordIsCorrectlySpelled() {
-        // Given
-        Round round = new Round("woord");
-        String guessedWord = "woord";
-        // When
-        boolean result = round.guessedWordIsCorrectlySpelled(guessedWord);
-        // Then
-        assertTrue(result);
-    }
-
-    @Disabled
-    @Test
-    void guessedWordIsIncorrectlySpelled() {
-        //Given
-        Round round = new Round("woord");
-        String guessedWord = "weird";
-        //When
-        boolean result = round.guessedWordIsCorrectlySpelled(guessedWord);
-        //Then
-        assertFalse(result);
-    }
-
     @Test
     void guessedWordIsCorrectLength() {
         //Given

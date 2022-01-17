@@ -1,6 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.application;
 
 import nl.hu.cisq1.lingo.trainer.data.GameRepository;
+import nl.hu.cisq1.lingo.trainer.domain.Feedback;
 import nl.hu.cisq1.lingo.trainer.domain.Game;
 import nl.hu.cisq1.lingo.trainer.domain.LetterFeedback;
 import nl.hu.cisq1.lingo.trainer.domain.Progress;
@@ -48,15 +49,16 @@ class TrainerServiceTest {
     void guessWord() {
         // Given
         Game game = Game.playing("woord");
+        Feedback expectedFeedback = new Feedback("woird", List.of(LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID));
         WordService mockService = mock(WordService.class);
         GameRepository mockRepository = mock(GameRepository.class);
         when(mockRepository.findById(1L))
                 .thenReturn(Optional.of(game));
 
-        Progress expectedResult = new Progress(1L,0, List.of(), List.of('w', '.', '.', '.', '.'), 1);
+        Progress expectedResult = new Progress(1L,0, List.of(expectedFeedback), List.of('w', '.', '.', '.', '.'), 1);
         // When
         TrainerService service = new TrainerService(mockService, mockRepository);
-        Progress result = service.guessWord(1L, "waard");
+        Progress result = service.guessWord(1L, "woird");
         // Then
         assertEquals(expectedResult, result);
     }

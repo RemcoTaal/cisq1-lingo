@@ -109,7 +109,9 @@ public class Round {
         List<LetterFeedback> letterFeedbackList = new ArrayList<>();
         guessedWord.chars()
                 .forEach(character -> letterFeedbackList.add(LetterFeedback.INVALID));
-        return new Feedback(guessedWord, letterFeedbackList);
+        Feedback feedback = new Feedback(guessedWord, letterFeedbackList);
+        addFeedbackToHistory(feedback);
+        return feedback;
     }
 
     public List<LetterFeedback> checkCharPositions(String guessedWord) {
@@ -149,10 +151,6 @@ public class Round {
             return null;
         }
         return this.feedbackHistory.get(this.feedbackHistory.size() - 1).getLetterFeedbackList();
-    }
-
-    public boolean guessedWordIsCorrectlySpelled(String guessedWord){
-        return true;
     }
 
     public boolean guessedWordIsCorrectLength(String guessedWord){
