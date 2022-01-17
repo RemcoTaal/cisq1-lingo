@@ -3,7 +3,6 @@ package nl.hu.cisq1.lingo.trainer.application;
 import nl.hu.cisq1.lingo.trainer.data.GameRepository;
 import nl.hu.cisq1.lingo.trainer.domain.Game;
 import nl.hu.cisq1.lingo.trainer.domain.Progress;
-import nl.hu.cisq1.lingo.trainer.domain.exception.ActiveRoundException;
 import nl.hu.cisq1.lingo.words.application.WordService;
 import nl.hu.cisq1.lingo.words.domain.Word;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.lang.reflect.Executable;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -99,5 +98,49 @@ class TrainerServiceTest {
         Progress result = service.startNewRound(1L);
         // Then
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void startNewRoundWhenGameNotFound() {
+        // Given
+        WordService mockService = mock(WordService.class);
+        GameRepository mockRepository = mock(GameRepository.class);
+            when(mockRepository.findById(1L))
+                    .thenThrow(EntityNotFoundException.class);
+        Class<EntityNotFoundException> expectedException = EntityNotFoundException.class;
+        // When
+        TrainerService service = new TrainerService(mockService, mockRepository);
+        EntityNotFoundException exception = assertThrows(
+                EntityNotFoundException.class,
+                () -> service.startNewRound(1L));
+        assertEquals(expectedException, expectedException);
+    }
+
+    @Test
+    void guessWhenGameNotFound() {
+        // Given
+        WordService mockService = mock(WordService.class);
+        GameRepository mockRepository = mock(GameRepository.class);
+        when(mockRepository.findById(1L))
+                .thenThrow(EntityNotFoundException.class);
+        // When
+        TrainerService service = new TrainerService(mockService, mockRepository);
+        assertThrows(
+                EntityNotFoundException.class,
+                () -> service.guessWord(1L, "woord"));
+    }
+
+    @Test
+    void getProgressWhenGameNotFound() {
+        // Given
+        WordService mockService = mock(WordService.class);
+        GameRepository mockRepository = mock(GameRepository.class);
+        when(mockRepository.findById(1L))
+                .thenThrow(EntityNotFoundException.class);
+        // When
+        TrainerService service = new TrainerService(mockService, mockRepository);
+        assertThrows(
+                EntityNotFoundException.class,
+                () -> service.getProgress(1L));
     }
 }

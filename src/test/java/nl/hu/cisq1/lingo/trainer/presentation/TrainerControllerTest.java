@@ -55,7 +55,6 @@ class TrainerControllerTest {
         TrainerService mockService = mock(TrainerService.class);
         when(mockService.guessWord(1L, guessedWord))
                 .thenReturn(expectedResult);
-        HttpStatus expectedStatus = HttpStatus.OK;
         // When
         TrainerController controller = new TrainerController(mockService);
         Progress result = controller.guess(1L, requestBody);

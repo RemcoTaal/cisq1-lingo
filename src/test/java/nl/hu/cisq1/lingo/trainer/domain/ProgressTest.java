@@ -3,6 +3,8 @@ package nl.hu.cisq1.lingo.trainer.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -52,20 +54,31 @@ class ProgressTest {
     void testEquals() {
         // Given
         Progress progress = new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
-        // When
-        boolean result = progress.equals(this.progress);
         // Then
-        assertTrue(result);
+        assertThat(progress, equalTo(this.progress));
     }
 
     @Test
-    void testNotEquals() {
+    void testEqualReference() {
+        //When
+        assertThat(this.progress, equalTo(this.progress));
+    }
+
+    @Test
+    void testNotEqualReference() {
         // Given
-        Progress progress = new Progress(50, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 2);
+        Progress progress = new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
+        boolean expectedResult = this.progress == progress;
+        // When then
+        assertFalse(expectedResult);
+    }
+
+    @Test
+    void testNotEqualsClass() {
+        // Given
+        Game game = new Game();
         // When
-        boolean result = progress.equals(this.progress);
-        // Then
-        assertFalse(result);
+        assertThat(this.progress, not(game));
     }
 
     @Test

@@ -8,9 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.ConditionalOnRepositoryType;
-import org.springframework.boot.test.context.SpringBootTest;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -198,21 +197,64 @@ class RoundTest {
         // Given
         Round round1 = new Round("woord");
         Round round2 = new Round("woord");
-        // When
-        boolean result = round1.equals(round2);
         // Then
-        assertTrue(result);
+        assertThat(round1, is(round2));
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideNotEqualObjects")
+    void testNotEquals(Object round, Object object) {
+        // When
+        assertThat(round, not(object));
+    }
+
+    private static Stream<Arguments> provideNotEqualObjects() {
+        return Stream.of(
+                Arguments.of(
+                        // Round
+                        new Round("woord"),
+                        // Object
+                        null
+                        ),
+                Arguments.of(
+                        // Round
+                        new Round("woord"),
+                        // Object
+                        new Round("waard")
+                        ),
+                Arguments.of(
+                        // Round
+                        new Round("woord"),
+                        // Object
+                        new Game()
+                        ),
+                Arguments.of(
+                        // Round
+                        new Round("woord"),
+                        // Object
+                        Round.withDifferentAttributes("woord")
+                )
+        );
+    }
+
+
+
+    @Test
+    void testEqualReference() {
+        // Given
+        Round round = new Round("woord");
+        //When
+        assertThat(round, equalTo(round));
     }
 
     @Test
-    void testNotEquals() {
+    void testNotEqualReference() {
         // Given
-        Round round1 = new Round("woord");
-        Round round2 = new Round("waard");
+        Round round = new Round("woord");
+        Round round2 = new Round("woord");
+        boolean expectedResult = round == round2;
         // When
-        boolean result = round1.equals(round2);
-        // Then
-        assertFalse(result);
+        assertFalse(expectedResult);
     }
 
     @Test

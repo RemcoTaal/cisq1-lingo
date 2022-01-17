@@ -2,11 +2,8 @@ package nl.hu.cisq1.lingo.trainer.domain;
 
 import nl.hu.cisq1.lingo.trainer.domain.exception.ActiveRoundException;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.lang.reflect.Executable;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

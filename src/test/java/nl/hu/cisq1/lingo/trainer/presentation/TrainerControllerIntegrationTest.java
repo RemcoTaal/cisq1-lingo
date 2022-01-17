@@ -1,8 +1,11 @@
 package nl.hu.cisq1.lingo.trainer.presentation;
 
 import nl.hu.cisq1.lingo.CiTestConfiguration;
-import nl.hu.cisq1.lingo.words.domain.Word;
+import nl.hu.cisq1.lingo.trainer.data.GameRepository;
+import nl.hu.cisq1.lingo.trainer.domain.Game;
 import org.json.JSONObject;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +24,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import(CiTestConfiguration.class)
 @AutoConfigureMockMvc
 class TrainerControllerIntegrationTest {
-
     @Autowired
     private MockMvc mockMvc;
+
+    @BeforeAll
+    public static void setup(@Autowired GameRepository gameRepository) {
+        Game game = Game.playing("woord");
+        gameRepository.save(game);
+
+    }
+
+    @AfterAll
+    public static void breakDown(@Autowired GameRepository gameRepository) {
+
+    }
 
     @Test
     void startGame() throws Exception {

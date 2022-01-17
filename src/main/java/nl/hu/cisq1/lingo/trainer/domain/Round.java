@@ -25,7 +25,7 @@ public class Round {
     @OneToMany
     @JoinColumn
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private final List<Feedback> feedbackHistory = new ArrayList<>();
+    private List<Feedback> feedbackHistory = new ArrayList<>();
 
     @Convert(converter = HintConverter.class)
     private List<Character> previousHint = new ArrayList<>();
@@ -42,6 +42,16 @@ public class Round {
         this.attempts = 0;
         this.wordToGuess = wordToGuess;
         this.giveHint();
+    }
+
+    public static Round withDifferentAttributes(String wordToGuess) {
+        List<Feedback> feedbackHistory = new ArrayList<>();
+        feedbackHistory.add(Feedback.valid("woord"));
+        Round round = new Round(wordToGuess);
+        round.attempts = 2;
+        round.wordToGuess = "waard";
+        round.feedbackHistory = feedbackHistory;
+        return round;
     }
 
     public void guess(String guessedWord){

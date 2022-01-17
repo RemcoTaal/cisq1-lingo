@@ -1,5 +1,6 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import net.bytebuddy.implementation.EqualsMethod;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidFeedbackException;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidHintException;
 import org.junit.jupiter.api.DisplayName;
@@ -7,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -213,21 +216,17 @@ class FeedbackTest {
         // Given
         Feedback feedback1 = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
         Feedback feedback2 = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
-        // When
-        boolean result = feedback1.equals(feedback2);
         // Then
-        assertTrue(result);
+        assertThat(feedback1, equalTo(feedback2));
     }
 
     @Test
-    void testNotEquals() {
+    void testNotEqualsClass() {
         // Given
-        Feedback feedback1 = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
-        Feedback feedback2 = new Feedback("testing", List.of(LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
+        Game game = new Game();
+        Feedback feedback = Feedback.valid("woord");
         // When
-        boolean result = feedback1.equals(feedback2);
-        // Then
-        assertFalse(result);
+        assertThat(feedback, not(game));
     }
 
     @Test
