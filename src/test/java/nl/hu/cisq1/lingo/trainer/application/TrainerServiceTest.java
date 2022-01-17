@@ -106,14 +106,15 @@ class TrainerServiceTest {
         WordService mockService = mock(WordService.class);
         GameRepository mockRepository = mock(GameRepository.class);
             when(mockRepository.findById(1L))
-                    .thenThrow(EntityNotFoundException.class);
-        Class<EntityNotFoundException> expectedException = EntityNotFoundException.class;
+                    .thenThrow(new EntityNotFoundException("Game not found"));
+        EntityNotFoundException expectedException = new EntityNotFoundException("Game not found");
         // When
         TrainerService service = new TrainerService(mockService, mockRepository);
         EntityNotFoundException exception = assertThrows(
                 EntityNotFoundException.class,
-                () -> service.startNewRound(1L));
-        assertEquals(expectedException, expectedException);
+                () -> service.startNewRound(1L)
+        );
+        assertEquals(expectedException.getMessage(), exception.getMessage());
     }
 
     @Test
@@ -122,12 +123,15 @@ class TrainerServiceTest {
         WordService mockService = mock(WordService.class);
         GameRepository mockRepository = mock(GameRepository.class);
         when(mockRepository.findById(1L))
-                .thenThrow(EntityNotFoundException.class);
+                .thenThrow(new EntityNotFoundException("Game not found"));
+        EntityNotFoundException expectedException = new EntityNotFoundException("Game not found");
         // When
         TrainerService service = new TrainerService(mockService, mockRepository);
-        assertThrows(
+        EntityNotFoundException exception = assertThrows(
                 EntityNotFoundException.class,
-                () -> service.guessWord(1L, "woord"));
+                () -> service.guessWord(1L, "woord")
+        );
+        assertEquals(expectedException.getMessage(), exception.getMessage());
     }
 
     @Test
@@ -136,11 +140,14 @@ class TrainerServiceTest {
         WordService mockService = mock(WordService.class);
         GameRepository mockRepository = mock(GameRepository.class);
         when(mockRepository.findById(1L))
-                .thenThrow(EntityNotFoundException.class);
+                .thenThrow(new EntityNotFoundException("Game not found"));
+        EntityNotFoundException expectedException = new EntityNotFoundException("Game not found");
         // When
         TrainerService service = new TrainerService(mockService, mockRepository);
-        assertThrows(
+        EntityNotFoundException exception = assertThrows(
                 EntityNotFoundException.class,
-                () -> service.getProgress(1L));
+                () -> service.getProgress(1L)
+        );
+        assertEquals(expectedException.getMessage(), exception.getMessage());
     }
 }

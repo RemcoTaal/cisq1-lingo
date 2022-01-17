@@ -37,6 +37,21 @@ class GameTest {
     }
 
     @Test
+    @DisplayName("try to start new round when eliminated")
+    void startNewRoundWhenEliminated() {
+        // Given
+        Game game = Game.eliminated();
+        RoundException expectedException = RoundException.playerEliminated();
+        // When
+        RoundException exception = assertThrows(
+                RoundException.class,
+                () -> game.startNewRound("woord")
+        );
+        // Then
+        assertEquals(expectedException.getMessage(), exception.getMessage());
+    }
+
+    @Test
     void guessWhenAttemptLimitExceeded() {
         // Given
         Game game = Game.playing("woord");

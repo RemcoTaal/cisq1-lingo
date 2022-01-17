@@ -3,6 +3,7 @@ package nl.hu.cisq1.lingo.trainer.presentation;
 import nl.hu.cisq1.lingo.trainer.application.TrainerService;
 import nl.hu.cisq1.lingo.trainer.domain.Progress;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.RoundException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -44,6 +45,57 @@ class TrainerControllerTest {
         Progress result = controller.startNewRound(1L);
         // Then
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void startNewRoundWhenGameNotFound() {
+        // Given
+        Progress expectedResult = new Progress(15, List.of('s', '.', '.', '.', '.', '.'), 2);
+        TrainerService mockService = mock(TrainerService.class);
+        when(mockService.startNewRound(1000L))
+                .thenThrow(EntityNotFoundException.class);
+        HttpStatus expectedStatus = HttpStatus.NOT_FOUND;
+        // When
+        TrainerController controller = new TrainerController(mockService);
+        ResponseStatusException exception = assertThrows(
+                ResponseStatusException.class,
+                () -> controller.startNewRound(1000L)
+        );
+        assertEquals(expectedStatus, exception.getStatus());
+    }
+
+    @Test
+    void startNewRoundWhenActiveRound() {
+        // Given
+        Progress expectedResult = new Progress(15, List.of('s', '.', '.', '.', '.', '.'), 2);
+        TrainerService mockService = mock(TrainerService.class);
+        when(mockService.startNewRound(1L))
+                .thenThrow(RoundException.class);
+        HttpStatus expectedStatus = HttpStatus.BAD_REQUEST;
+        // When
+        TrainerController controller = new TrainerController(mockService);
+        ResponseStatusException exception = assertThrows(
+                ResponseStatusException.class,
+                () -> controller.startNewRound(1L)
+        );
+        assertEquals(expectedStatus, exception.getStatus());
+    }
+
+    @Test
+    void startNewRoundWhenPlayerEliminated() {
+        // Given
+        Progress expectedResult = new Progress(15, List.of('s', '.', '.', '.', '.', '.'), 2);
+        TrainerService mockService = mock(TrainerService.class);
+        when(mockService.startNewRound(1L))
+                .thenThrow(RoundException.class);
+        HttpStatus expectedStatus = HttpStatus.BAD_REQUEST;
+        // When
+        TrainerController controller = new TrainerController(mockService);
+        ResponseStatusException exception = assertThrows(
+                ResponseStatusException.class,
+                () -> controller.startNewRound(1L)
+        );
+        assertEquals(expectedStatus, exception.getStatus());
     }
 
     @Test
