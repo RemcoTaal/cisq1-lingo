@@ -3,11 +3,16 @@ package nl.hu.cisq1.lingo.trainer.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,14 +25,52 @@ class ProgressTest {
         this.progress = new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
     }
 
-    @Test
-    void getScore() {
-        // Given
-        int expectedResult = 0;
+    @ParameterizedTest
+    @MethodSource("provideCorrectScores")
+    void getScore(Progress progress, int expectedScore) {
         // When
-        int result = this.progress.getScore();
+        int score = progress.getScore();
         // Then
-        assertEquals(expectedResult, result);
+        assertThat(expectedScore, is(score));
+    }
+
+    private static Stream<Arguments> provideCorrectScores() {
+        return Stream.of(
+                Arguments.of(
+                        // Progress
+                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
+                        0
+                ),
+                Arguments.of(
+                        // Progress
+                        new Progress(1, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
+                        1
+                )
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideWrongScores")
+    void getWrongScore(Progress progress, int wrongScore) {
+        // When
+        int score = progress.getScore();
+        // Then
+        assertThat(score, not(wrongScore));
+    }
+
+    private static Stream<Arguments> provideWrongScores() {
+        return Stream.of(
+                Arguments.of(
+                        // Progress
+                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                        // Object
+                        1
+                ),
+                Arguments.of(
+                        // Progress
+                        new Progress(1, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),                   // Object
+                        2
+                )
+        );
     }
 
     @Test
@@ -55,31 +98,53 @@ class ProgressTest {
         // Given
         Progress progress = new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
         // Then
-        assertThat(progress, equalTo(this.progress));
+        assertThat(progress, is(this.progress));
+        assertThat(this.progress, is(this.progress));
     }
 
-    @Test
-    void testEqualReference() {
-        //When
-        assertThat(this.progress, equalTo(this.progress));
-    }
-
-    @Test
-    void testNotEqualReference() {
-        // Given
-        Progress progress = new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1);
-        boolean expectedResult = this.progress == progress;
-        // When then
-        assertFalse(expectedResult);
-    }
-
-    @Test
-    void testNotEqualsClass() {
-        // Given
-        Game game = new Game();
+    @ParameterizedTest
+    @MethodSource("provideNotEqualObjects")
+    void testNotEquals(Progress progress, Object object) {
         // When
-        assertThat(this.progress, not(game));
+        assertThat(progress, not(object));
     }
+
+    private static Stream<Arguments> provideNotEqualObjects() {
+        return Stream.of(
+                Arguments.of(
+                        // Progress
+                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        // Object
+                        null
+                ),
+                Arguments.of(
+                        // Progress
+                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        // Object
+                        new Game()
+                ),
+                Arguments.of(
+                        // Progress
+                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        // Object different score
+                        new Progress(5, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1)
+                ),
+                Arguments.of(
+                        // Progress
+                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        // Object different round number
+                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 3)
+                ),
+                Arguments.of(
+                        // Progress
+                        new Progress(0, List.of('t', 'e', 's', 't', 'i', 'n', 'g'), 1),
+                        // Object different current hint
+                        new Progress(0, List.of('t', 'e', 's', 't'), 1)
+                )
+        );
+    }
+
+
 
     @Test
     void testHashCode() {

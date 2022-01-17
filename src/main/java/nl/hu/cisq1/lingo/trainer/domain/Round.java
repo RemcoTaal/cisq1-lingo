@@ -44,13 +44,15 @@ public class Round {
         this.giveHint();
     }
 
-    public static Round withDifferentAttributes(String wordToGuess) {
-        List<Feedback> feedbackHistory = new ArrayList<>();
-        feedbackHistory.add(Feedback.valid("woord"));
+    public static Round differentAttempt(String wordToGuess) {
         Round round = new Round(wordToGuess);
         round.attempts = 2;
-        round.wordToGuess = "waard";
-        round.feedbackHistory = feedbackHistory;
+        return round;
+    }
+
+    public static Round differentFeedbackHistory(String wordToGuess) {
+        Round round = new Round(wordToGuess);
+        round.feedbackHistory = List.of(Feedback.valid("woord"));
         return round;
     }
 

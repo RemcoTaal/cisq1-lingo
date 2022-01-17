@@ -3,6 +3,7 @@ package nl.hu.cisq1.lingo.trainer.domain;
 import net.bytebuddy.implementation.EqualsMethod;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidFeedbackException;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidHintException;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -69,11 +70,14 @@ class FeedbackTest {
     @Test
     @DisplayName("feedback is invalid if length of attempt is not equals to size of letterfeedback list")
     void isInvalid() {
+        // Given
+        String attempt = "woord";
+        List<LetterFeedback> letterFeedbackList = List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.ABSENT);
         assertThrows(
                 // Then
                 InvalidFeedbackException.class,
                 // When
-                () -> Feedback.invalid("woord")
+                () -> new Feedback(attempt, letterFeedbackList)
         );
     }
 
@@ -217,16 +221,44 @@ class FeedbackTest {
         Feedback feedback1 = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
         Feedback feedback2 = new Feedback("testing", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT));
         // Then
-        assertThat(feedback1, equalTo(feedback2));
+        assertThat(feedback1, is(feedback2));
+        assertThat(feedback1, is(feedback1));
     }
 
-    @Test
-    void testNotEqualsClass() {
-        // Given
-        Game game = new Game();
-        Feedback feedback = Feedback.valid("woord");
+    @ParameterizedTest
+    @MethodSource("provideNotEqualObjects")
+    void testNotEqualsClass(Feedback feedback, Object object) {
         // When
-        assertThat(feedback, not(game));
+        assertThat(feedback, not(object));
+    }
+
+    private static Stream<Arguments> provideNotEqualObjects() {
+        return Stream.of(
+                Arguments.of(
+                        // Progress
+                        new Feedback("woord", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT)),
+                        // Object
+                        null
+                ),
+                Arguments.of(
+                        // Progress
+                        new Feedback("woord", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT)),
+                        // Object
+                        new Game()
+                ),
+                Arguments.of(
+                        // Progress
+                        new Feedback("woord", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT)),
+                        // Object different attempt
+                        new Feedback("waard", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT))
+                ),
+                Arguments.of(
+                        // Progress
+                        new Feedback("woord", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.CORRECT)),
+                        // Object different feedback list
+                        new Feedback("woord", List.of(LetterFeedback.CORRECT, LetterFeedback.CORRECT, LetterFeedback.ABSENT, LetterFeedback.CORRECT, LetterFeedback.CORRECT))
+                )
+        );
     }
 
     @Test

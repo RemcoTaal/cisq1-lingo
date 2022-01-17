@@ -199,11 +199,12 @@ class RoundTest {
         Round round2 = new Round("woord");
         // Then
         assertThat(round1, is(round2));
+        assertThat(round1, is(round1));
     }
 
     @ParameterizedTest
     @MethodSource("provideNotEqualObjects")
-    void testNotEquals(Object round, Object object) {
+    void testNotEquals(Round round, Object object) {
         // When
         assertThat(round, not(object));
     }
@@ -232,29 +233,15 @@ class RoundTest {
                         // Round
                         new Round("woord"),
                         // Object
-                        Round.withDifferentAttributes("woord")
+                        Round.differentAttempt("woord")
+                ),
+                Arguments.of(
+                        // Round
+                        new Round("woord"),
+                        // Object
+                        Round.differentFeedbackHistory("woord")
                 )
         );
-    }
-
-
-
-    @Test
-    void testEqualReference() {
-        // Given
-        Round round = new Round("woord");
-        //When
-        assertThat(round, equalTo(round));
-    }
-
-    @Test
-    void testNotEqualReference() {
-        // Given
-        Round round = new Round("woord");
-        Round round2 = new Round("woord");
-        boolean expectedResult = round == round2;
-        // When
-        assertFalse(expectedResult);
     }
 
     @Test
@@ -269,5 +256,41 @@ class RoundTest {
         int result = round.hashCode();
         // Then
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void differentAttempt() {
+        // Given
+        Round round1 = new Round("woord");
+        Round round2 = Round.differentAttempt("woord");
+        // Then
+        assertThat(round1, not(round2));
+    }
+
+    @Test
+    void notDifferentAttempt() {
+        // Given
+        Round round1 = null;
+        Round round2 = Round.differentAttempt("woord");
+        // Then
+        assertThat(round1, not(round2));
+    }
+
+    @Test
+    void differentFeedbackHistory() {
+        // Given
+        Round round1 = new Round("woord");
+        Round round2 = Round.differentFeedbackHistory("woord");
+        // Then
+        assertThat(round1, not(round2));
+    }
+
+    @Test
+    void notDifferentFeedbackHistory() {
+        // Given
+        Round round1 = null;
+        Round round2 = Round.differentFeedbackHistory("woord");
+        // Then
+        assertThat(round1, not(round2));
     }
 }

@@ -38,14 +38,6 @@ public class Feedback {
         return new Feedback(attempt, letterFeedbackList);
     }
 
-    public static Feedback invalid(String attempt){
-        List<LetterFeedback> letterFeedbackList = new ArrayList<>();
-        for (int i = 0; i<attempt.length() + 1; i++){
-            letterFeedbackList.add(LetterFeedback.INVALID);
-        }
-        return new Feedback(attempt, letterFeedbackList);
-    }
-
     public List<Character> giveHint(List<Character> previousHint, String wordToGuess) throws InvalidHintException {
         // Throw exception if previoushint length does not match word to guess length or letterfeedback list size
         if (previousHint.size() != letterFeedbackList.size()) {
