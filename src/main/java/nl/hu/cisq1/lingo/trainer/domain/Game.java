@@ -1,6 +1,6 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
-import nl.hu.cisq1.lingo.trainer.domain.exception.ActiveRoundException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.RoundException;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
 import org.hibernate.annotations.Cascade;
 
@@ -61,8 +61,11 @@ public class Game {
     }
 
     public void startNewRound(String wordToGuess){
-        if (this.status != GameStatus.WAITING_FOR_ROUND){
-            throw ActiveRoundException.activeRound();
+        if (this.status == GameStatus.ELIMINATED){
+            throw RoundException.playerEliminated();
+        }
+        if (this.status == GameStatus.PLAYING){
+            throw RoundException.activeRound();
         }
         Round round = new Round(wordToGuess);
         this.addRound(round);
@@ -71,16 +74,12 @@ public class Game {
     }
 
     public void guess(String guessedWord){
-        // Check if attempt is valid
-        switch(this.status){
-            case ELIMINATED: {
-                throw InvalidAttemptException.playerEliminated();
-            }
-            case WAITING_FOR_ROUND: {
-                throw InvalidAttemptException.noActiveRound();
-            }
+        if (this.status == GameStatus.ELIMINATED){
+            throw InvalidAttemptException.playerEliminated();
         }
-
+        if (this.status == GameStatus.WAITING_FOR_ROUND){
+            throw InvalidAttemptException.noActiveRound();
+        }
         // Try to perform the guess
         try {
             currentRound.guess(guessedWord);

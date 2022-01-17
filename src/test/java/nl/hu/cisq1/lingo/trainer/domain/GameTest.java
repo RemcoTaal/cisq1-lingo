@@ -1,6 +1,6 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
-import nl.hu.cisq1.lingo.trainer.domain.exception.ActiveRoundException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.RoundException;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ class GameTest {
         Game game = Game.playing("woord");
         // When Then
         assertThrows(
-                ActiveRoundException.class,
+                RoundException.class,
                 () -> game.startNewRound("woord"));
     }
 
