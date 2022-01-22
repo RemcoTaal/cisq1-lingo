@@ -2,16 +2,12 @@ package nl.hu.cisq1.lingo.trainer.domain;
 
 import nl.hu.cisq1.lingo.trainer.data.converters.HintConverter;
 import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidAttemptException;
-import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidHintException;
-import nl.hu.cisq1.lingo.words.application.WordService;
 import org.hibernate.annotations.Cascade;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 @Entity
 public class Round {
@@ -76,7 +72,7 @@ public class Round {
     }
 
     public List<Character> giveHint(){
-        if (feedbackHistory.size() == 0){
+        if (feedbackHistory.isEmpty()){
             return giveFirstHint();
         }
         Feedback lastFeedback = feedbackHistory.get(feedbackHistory.size() - 1);
@@ -147,8 +143,8 @@ public class Round {
     }
 
     public List<LetterFeedback> getLatestLetterFeedback() {
-        if (this.feedbackHistory.size() == 0){
-            return null;
+        if (this.feedbackHistory.isEmpty()){
+            return List.of();
         }
         return this.feedbackHistory.get(this.feedbackHistory.size() - 1).getLetterFeedbackList();
     }

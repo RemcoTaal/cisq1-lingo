@@ -1,10 +1,9 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Progress implements Serializable {
+public class Progress {
     Long id;
     GameStatus status;
     int score;

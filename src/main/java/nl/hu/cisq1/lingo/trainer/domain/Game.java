@@ -10,6 +10,8 @@ import java.util.List;
 
 @Entity
 public class Game {
+    private static final String DEFAULT_WORD_TO_GUESS = "woord";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -34,7 +36,7 @@ public class Game {
     }
 
     public static Game waitingForRound() {
-        Game game = playing("woord");
+        Game game = playing(DEFAULT_WORD_TO_GUESS);
         game.currentRound.guess("waard");
         game.currentRound.guess("wiird");
         game.currentRound.guess("woord");
@@ -43,7 +45,7 @@ public class Game {
     }
 
     public static Game withProgress() {
-        Game game = playing("woord");
+        Game game = playing(DEFAULT_WORD_TO_GUESS);
         game.guess("woord");
         game.startNewRound("worden");
         game.guess("worden");
@@ -110,12 +112,12 @@ public class Game {
     }
 
     public Progress showProgress(){
-        GameStatus status = this.status;
+        GameStatus gameStatus = this.status;
         int score = calculateScore();
         List<Character> currentHint = currentRound.giveHint();
         List<Feedback> feedbackHistory = currentRound.getFeedbackHistory();
         int roundNr = this.getRoundNr();
-        return new Progress(id, status, score, feedbackHistory, currentHint, roundNr);
+        return new Progress(id, gameStatus, score, feedbackHistory, currentHint, roundNr);
     }
 
     public boolean isPlayerEliminated(){
