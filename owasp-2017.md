@@ -3,7 +3,7 @@
 ## A1:2017 Injection
 
 ### Beschrijving
-Een applicatie gebruikt niet betrouwbare inputdata en stuur dit direct naar een interpreter, hierdoor kan bijvoorbeeld een SQL query dermate worden aangepast dat gevoelige data wordt teruggegeven.
+Een applicatie gebruikt niet betrouwbare inputdata en stuurt dit direct naar een interpreter, hierdoor kan bijvoorbeeld een SQL query dermate worden aangepast dat gevoelige data wordt teruggegeven.
 
 ### Risico
 Aanpassen van SQL door bijvoorbeeld de WHERE clause altijd true te laten zijn. Waardoor alle gegevens van een gekozen table blootgesteld kunnen worden. 
