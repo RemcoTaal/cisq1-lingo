@@ -62,9 +62,7 @@ class GameTest {
         game.guess("wegen", true);
         GameStatus expectedResult = GameStatus.ELIMINATED;
         // When
-        assertThrows(
-                InvalidAttemptException.class,
-                () -> game.guess("weten", true));
+        game.guess("weten", true);
         GameStatus result = game.status;
         assertEquals(expectedResult, result);
     }

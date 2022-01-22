@@ -93,8 +93,6 @@ public class Game {
         } catch (InvalidAttemptException exception) {
             // Set the status to elimated when attempt limit was exceeded
             this.status = GameStatus.ELIMINATED;
-            // Re throw the exception
-            throw exception;
         }
     }
 
