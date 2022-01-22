@@ -285,7 +285,7 @@ class RoundTest {
                         // Round
                         new Round("woord"),
                         // Object
-                        null
+                        List.of()
                 ),
                 Arguments.of(
                         // Round
