@@ -9,7 +9,7 @@
 
 
 ## Postman API documentation
-Zie [API documentation](https://documenter.getpostman.com/view/4219293/UVXqDscU)
+Zie [link](https://documenter.getpostman.com/view/4219293/UVXqDscU)
 
 ## OWASP kwetsbaarheden analyse
-Zie [owasp-2017.md](https://github.com/RemcoTaal/cisq1-lingo/blob/main/owasp-2017.md)
+Zie [link](https://github.com/RemcoTaal/cisq1-lingo/blob/main/owasp-2017.md)
