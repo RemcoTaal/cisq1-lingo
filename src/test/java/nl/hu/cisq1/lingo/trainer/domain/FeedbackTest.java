@@ -112,10 +112,11 @@ class FeedbackTest {
     void wordToGuessAndFeedbackListNotSameLength(String wordToGuess, List<LetterFeedback> letterFeedbackList) {
         // Given
         Feedback feedback = new Feedback("waarde", letterFeedbackList);
+        List<Character> previousHint = List.of('w', '.', '.', '.', '.', '.');
         // Then
         assertThrows(
                 InvalidHintException.class,
-                () -> feedback.giveHint(List.of('w', '.', '.', '.', '.', '.'), wordToGuess)
+                () -> feedback.giveHint(previousHint, wordToGuess)
         );
     }
 
