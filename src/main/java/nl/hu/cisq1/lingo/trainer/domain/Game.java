@@ -99,6 +99,12 @@ public class Game {
     }
 
     public void guessIncorrectlySpelledWord(String guessedWord){
+        if (this.status == GameStatus.ELIMINATED){
+            throw InvalidAttemptException.playerEliminated();
+        }
+        if (this.status == GameStatus.WAITING_FOR_ROUND){
+            throw InvalidAttemptException.noActiveRound();
+        }
         currentRound.setAttempts(currentRound.getAttempts() + 1);
         currentRound.giveFeedbackInvalidWord(guessedWord);
     }
