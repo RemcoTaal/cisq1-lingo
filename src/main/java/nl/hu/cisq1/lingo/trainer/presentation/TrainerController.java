@@ -13,7 +13,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("game")
+@RequestMapping("games")
 public class TrainerController {
 
     private final TrainerService trainerService;
@@ -28,7 +28,7 @@ public class TrainerController {
         return trainerService.startGame();
     }
 
-    @PostMapping(value = "/{id}/round", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{id}/rounds", produces = MediaType.APPLICATION_JSON_VALUE)
     public Progress startNewRound(@PathVariable Long id) {
         try {
             return trainerService.startNewRound(id);
