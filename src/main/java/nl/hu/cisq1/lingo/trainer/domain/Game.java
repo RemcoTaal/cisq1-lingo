@@ -39,14 +39,14 @@ public class Game {
         Game game = playing(DEFAULT_WORD_TO_GUESS);
         game.currentRound.guess("waard");
         game.currentRound.guess("wiird");
-        game.currentRound.guess("woord");
+        game.currentRound.guess(DEFAULT_WORD_TO_GUESS);
         game.status = GameStatus.WAITING_FOR_ROUND;
         return game;
     }
 
     public static Game withProgress() {
         Game game = playing(DEFAULT_WORD_TO_GUESS);
-        game.guess("woord");
+        game.guess(DEFAULT_WORD_TO_GUESS);
         game.startNewRound("worden");
         game.guess("worden");
         game.startNewRound("schacht");

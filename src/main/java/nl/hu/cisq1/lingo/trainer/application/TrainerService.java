@@ -10,7 +10,7 @@ import javax.persistence.EntityNotFoundException;
 
 @Service
 public class TrainerService {
-    private static final String GAME_NOT_FOUND_MESSAGE = "Game not found";
+    public static final String GAME_NOT_FOUND_MESSAGE = "Game not found";
     private final WordService wordService;
     private final GameRepository gameRepository;
 

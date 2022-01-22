@@ -119,7 +119,14 @@ class TrainerControllerIntegrationTest {
     }
 
     @Test
-    void getProgress() {
+    void getProgress() throws Exception {
+        // Given
+        RequestBuilder request = MockMvcRequestBuilders
+                .get("/{id}/progress", 1001);
+        // When
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
 
