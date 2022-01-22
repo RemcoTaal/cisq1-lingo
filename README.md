@@ -7,5 +7,9 @@
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=RemcoTaal_cisq1-lingo&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=RemcoTaal_cisq1-lingo)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=RemcoTaal_cisq1-lingo&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=RemcoTaal_cisq1-lingo)
 
+
+## Postman API documentation
+Zie [API documentation](https://documenter.getpostman.com/view/4219293/UVXqDscU)
+
 ## OWASP kwetsbaarheden analyse
 Zie [owasp-2017.md](https://github.com/RemcoTaal/cisq1-lingo/blob/main/owasp-2017.md)
