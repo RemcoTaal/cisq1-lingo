@@ -42,11 +42,7 @@ public class TrainerService {
         Game game = this.gameRepository
                 .findById(gameId)
                 .orElseThrow(() -> new EntityNotFoundException(GAME_NOT_FOUND_MESSAGE));
-        if (isCorrectlySpelled(guessedWord)){
-            game.guess(guessedWord);
-        } else {
-            game.guessIncorrectlySpelledWord(guessedWord);
-        }
+        game.guess(guessedWord, isCorrectlySpelled(guessedWord));
         this.gameRepository.save(game);
         return game.showProgress();
     }

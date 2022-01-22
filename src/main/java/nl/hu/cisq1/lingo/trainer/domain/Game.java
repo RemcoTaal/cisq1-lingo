@@ -37,18 +37,18 @@ public class Game {
 
     public static Game waitingForRound() {
         Game game = playing(DEFAULT_WORD_TO_GUESS);
-        game.currentRound.guess("waard");
-        game.currentRound.guess("wiird");
-        game.currentRound.guess(DEFAULT_WORD_TO_GUESS);
+        game.currentRound.guess("waard", true);
+        game.currentRound.guess("wiird", true);
+        game.currentRound.guess(DEFAULT_WORD_TO_GUESS, true);
         game.status = GameStatus.WAITING_FOR_ROUND;
         return game;
     }
 
     public static Game withProgress() {
         Game game = playing(DEFAULT_WORD_TO_GUESS);
-        game.guess(DEFAULT_WORD_TO_GUESS);
+        game.guess(DEFAULT_WORD_TO_GUESS, true);
         game.startNewRound("worden");
-        game.guess("worden");
+        game.guess("worden", true);
         game.startNewRound("schacht");
         return game;
     }
@@ -77,7 +77,7 @@ public class Game {
         this.status = GameStatus.PLAYING;
     }
 
-    public void guess(String guessedWord){
+    public void guess(String guessedWord, boolean isCorrectlySpelled){
         if (this.status == GameStatus.ELIMINATED){
             throw InvalidAttemptException.playerEliminated();
         }
@@ -86,7 +86,7 @@ public class Game {
         }
         // Try to perform the guess
         try {
-            currentRound.guess(guessedWord);
+            currentRound.guess(guessedWord, isCorrectlySpelled);
             if (currentRound.isWordGuessed) {
                 this.status = GameStatus.WAITING_FOR_ROUND;
             }
@@ -96,17 +96,6 @@ public class Game {
             // Re throw the exception
             throw exception;
         }
-    }
-
-    public void guessIncorrectlySpelledWord(String guessedWord){
-        if (this.status == GameStatus.ELIMINATED){
-            throw InvalidAttemptException.playerEliminated();
-        }
-        if (this.status == GameStatus.WAITING_FOR_ROUND){
-            throw InvalidAttemptException.noActiveRound();
-        }
-        currentRound.setAttempts(currentRound.getAttempts() + 1);
-        currentRound.giveFeedbackInvalidWord(guessedWord);
     }
 
     public void addRound(Round round){

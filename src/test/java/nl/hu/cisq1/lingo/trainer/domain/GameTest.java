@@ -55,16 +55,16 @@ class GameTest {
     void guessWhenAttemptLimitExceeded() {
         // Given
         Game game = Game.playing("woord");
-        game.guess("waagt");
-        game.guess("waait");
-        game.guess("water");
-        game.guess("waakt");
-        game.guess("wegen");
+        game.guess("waagt", true);
+        game.guess("waait", true);
+        game.guess("water", true);
+        game.guess("waakt", true);
+        game.guess("wegen", true);
         GameStatus expectedResult = GameStatus.ELIMINATED;
         // When
         assertThrows(
                 InvalidAttemptException.class,
-                () -> game.guess("weten"));
+                () -> game.guess("weten", true));
         GameStatus result = game.status;
         assertEquals(expectedResult, result);
     }
@@ -76,7 +76,7 @@ class GameTest {
         // When Then
         assertThrows(
                 InvalidAttemptException.class,
-                () -> game.guess("woord")
+                () -> game.guess("woord", true)
         );
     }
 
@@ -87,7 +87,7 @@ class GameTest {
         // When Then
         assertThrows(
                 InvalidAttemptException.class,
-                () -> game.guess("whatever"));
+                () -> game.guess("whatever", true));
     }
 
     @Test
@@ -97,7 +97,7 @@ class GameTest {
         int expectedAttempts = 1;
         List<Feedback> expectedFeedbackHistory = List.of(new Feedback("wooord", List.of(LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID, LetterFeedback.INVALID)));
         // When
-        game.guessIncorrectlySpelledWord("wooord");
+        game.guess("wooord", false);
         // Then
         assertEquals(expectedAttempts, game.currentRound.getAttempts());
         assertEquals(expectedFeedbackHistory, game.currentRound.getFeedbackHistory());
@@ -118,8 +118,8 @@ class GameTest {
     void showProgress() {
         // Given
         Game game = Game.playing("woord");
-        game.guess("weten");
-        game.guess("wreed");
+        game.guess("weten", true);
+        game.guess("wreed", true);
         Progress expectedProgress = new Progress(
                 1L,
                 GameStatus.PLAYING,
@@ -206,14 +206,14 @@ class GameTest {
         // Given
         Game game = new Game();
         Round round1 = new Round("woord");
-        round1.guess("waard");
-        round1.guess("woord");
+        round1.guess("waard", true);
+        round1.guess("woord", true);
         game.addRound(round1);
         Round round2 = new Round("anders");
-        round2.guess("actief");
-        round2.guess("aanzet");
-        round2.guess("afloop");
-        round2.guess("anders");
+        round2.guess("actief", true);
+        round2.guess("aanzet", true);
+        round2.guess("afloop", true);
+        round2.guess("anders", true);
         game.addRound(round2);
         // When
         int score = game.calculateScore();

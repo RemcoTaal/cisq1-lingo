@@ -59,12 +59,12 @@ public class Round {
         return round;
     }
 
-    public void guess(String guessedWord){
+    public void guess(String guessedWord, boolean isCorrectlySpelled){
         this.attempts++;
         if (!isValidAttempt()) {
             throw InvalidAttemptException.limitExceeded(this);
         }
-        Feedback feedback = giveFeedback(guessedWord);
+        Feedback feedback = isCorrectlySpelled ? giveFeedback(guessedWord) : giveFeedbackInvalidWord(guessedWord);
         addFeedbackToHistory(feedback);
         if (feedback.isWordGuessed()){
             this.isWordGuessed = true;
@@ -105,9 +105,7 @@ public class Round {
         List<LetterFeedback> letterFeedbackList = new ArrayList<>();
         guessedWord.chars()
                 .forEach(character -> letterFeedbackList.add(LetterFeedback.INVALID));
-        Feedback feedback = new Feedback(guessedWord, letterFeedbackList);
-        addFeedbackToHistory(feedback);
-        return feedback;
+        return new Feedback(guessedWord, letterFeedbackList);
     }
 
     public List<LetterFeedback> checkCharPositions(String guessedWord) {

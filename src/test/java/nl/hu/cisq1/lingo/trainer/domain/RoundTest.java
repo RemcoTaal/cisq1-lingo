@@ -32,7 +32,7 @@ class RoundTest {
                 LetterFeedback.CORRECT)
         );
         // When
-        round.guess(guessedWord);
+        round.guess(guessedWord, true);
         // Then
         assertEquals(round.getFeedbackHistory(), List.of(feedback));
     }
@@ -47,7 +47,7 @@ class RoundTest {
                 // Then
                 InvalidAttemptException.class,
                 // When
-                () -> round.guess("woord")
+                () -> round.guess("woord", true)
         );
     }
 
