@@ -7,9 +7,10 @@
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=RemcoTaal_cisq1-lingo&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=RemcoTaal_cisq1-lingo)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=RemcoTaal_cisq1-lingo&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=RemcoTaal_cisq1-lingo)
 
-## Pitest report
+## Pitest report (Mutation coverage)
 ![PitestReport](https://github.com/RemcoTaal/cisq1-lingo/blob/main/pit-reports/pitest.png?raw=true)
-Zie [index.html](https://github.com/RemcoTaal/cisq1-lingo/blob/main/pit-reports/index.html)
+
+Zie volledig report: [index.html](https://htmlpreview.github.io/?https://github.com/RemcoTaal/cisq1-lingo/blob/main/pit-reports/index.html)
 
 ## Postman API documentation
 Zie [link](https://documenter.getpostman.com/view/4219293/UVXqDscU)
