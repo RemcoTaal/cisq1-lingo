@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>Feedback.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package nl.hu.cisq1.lingo.trainer.domain;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import nl.hu.cisq1.lingo.trainer.data.converters.LetterFeedbackConverter;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidFeedbackException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import nl.hu.cisq1.lingo.trainer.domain.exception.InvalidHintException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import javax.persistence.*;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.ArrayList;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.List;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Objects;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>@Entity</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class Feedback {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Id</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @GeneratedValue(strategy = GenerationType.AUTO)</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private Long id;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private String attempt;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Convert(converter = LetterFeedbackConverter.class)</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private List&#60;LetterFeedback&#62; letterFeedbackList;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public Feedback() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public Feedback(String attempt, List&#60;LetterFeedback&#62; letterFeedbackList){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_26'/>
+26
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_26'>1</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (!isSameLength(attempt, letterFeedbackList)) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            throw InvalidFeedbackException.wrongLength(attempt, letterFeedbackList);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.attempt = attempt;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.letterFeedbackList = letterFeedbackList;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static Feedback valid(String attempt){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        List&#60;LetterFeedback&#62; letterFeedbackList = new ArrayList&#60;&#62;();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_35'/>
+35
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_35'>2</a>
+<span>
+
+1. valid : changed conditional boundary &rarr; KILLED<br/>
+
+2. valid : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i&#60;attempt.length(); i++){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            letterFeedbackList.add(LetterFeedback.CORRECT);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_38'/>
+38
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_38'>1</a>
+<span>
+
+1. valid : replaced return value with null for nl/hu/cisq1/lingo/trainer/domain/Feedback::valid &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return new Feedback(attempt, letterFeedbackList);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public List&#60;Character&#62; giveHint(List&#60;Character&#62; previousHint, String wordToGuess) throws InvalidHintException {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        // Throw exception if previoushint length does not match word to guess length or letterfeedback list size</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_43'/>
+43
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_43'>1</a>
+<span>
+
+1. giveHint : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (previousHint.size() != letterFeedbackList.size()) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            throw InvalidHintException.wrongPreviousHintAndLetterFeedbackListLength(previousHint, letterFeedbackList);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        // Throw exception if word to guess length does not match the letterfeedback list size</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_47'/>
+47
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_47'>1</a>
+<span>
+
+1. giveHint : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (wordToGuess.length() != letterFeedbackList.size()) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            throw InvalidHintException.wrongLetterFeedbackListAndWordToGuessLength(letterFeedbackList, wordToGuess);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        // Make a new arraylist so it will be mutable</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        List&#60;Character&#62; newHint = new ArrayList&#60;&#62;(previousHint);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        // Loop over the length of the word ans compare to the given feedback</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_55'/>
+55
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_55'>2</a>
+<span>
+
+1. giveHint : changed conditional boundary &rarr; KILLED<br/>
+
+2. giveHint : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; wordToGuess.length(); i++){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_56'/>
+56
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_56'>2</a>
+<span>
+
+1. giveHint : negated conditional &rarr; KILLED<br/>
+
+2. giveHint : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            if (letterFeedbackList.get(i) == LetterFeedback.CORRECT &#38;&#38; previousHint.get(i) == &#39;.&#39;){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                newHint.set(i, wordToGuess.charAt(i));</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_61'/>
+61
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_61'>1</a>
+<span>
+
+1. giveHint : replaced return value with Collections.emptyList for nl/hu/cisq1/lingo/trainer/domain/Feedback::giveHint &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return newHint;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean isWordGuessed(){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_65'/>
+65
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_65'>2</a>
+<span>
+
+1. isWordGuessed : replaced boolean return with false for nl/hu/cisq1/lingo/trainer/domain/Feedback::isWordGuessed &rarr; KILLED<br/>
+
+2. isWordGuessed : replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::isWordGuessed &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return letterFeedbackList</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                .stream()</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_67'/>
+67
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_67'>2</a>
+<span>
+
+1. lambda$isWordGuessed$0 : replaced boolean return with false for nl/hu/cisq1/lingo/trainer/domain/Feedback::lambda$isWordGuessed$0 &rarr; KILLED<br/>
+
+2. lambda$isWordGuessed$0 : replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::lambda$isWordGuessed$0 &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                .allMatch(letterFeedback -&#62; letterFeedback.equals(LetterFeedback.CORRECT));</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_68'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean isGuessValid(){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_71'/>
+71
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_71'>2</a>
+<span>
+
+1. isGuessValid : replaced boolean return with false for nl/hu/cisq1/lingo/trainer/domain/Feedback::isGuessValid &rarr; KILLED<br/>
+
+2. isGuessValid : replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::isGuessValid &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return letterFeedbackList</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                .stream()</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_73'/>
+73
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_73'>2</a>
+<span>
+
+1. lambda$isGuessValid$1 : replaced boolean return with false for nl/hu/cisq1/lingo/trainer/domain/Feedback::lambda$isGuessValid$1 &rarr; KILLED<br/>
+
+2. lambda$isGuessValid$1 : replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::lambda$isGuessValid$1 &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                .noneMatch(letterFeedback -&#62; letterFeedback.equals(LetterFeedback.INVALID));</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean isSameLength(String attempt, List&#60;LetterFeedback&#62; letterFeedbackList){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_77'/>
+77
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_77'>2</a>
+<span>
+
+1. isSameLength : negated conditional &rarr; KILLED<br/>
+
+2. isSameLength : replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::isSameLength &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attempt.length() == letterFeedbackList.size();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_79'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_80'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_81'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean equals(Object o) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_82'/>
+82
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_82'>2</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : replaced boolean return with false for nl/hu/cisq1/lingo/trainer/domain/Feedback::equals &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (this == o) return true;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_83'/>
+83
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_83'>3</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : negated conditional &rarr; KILLED<br/>
+
+3. equals : replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::equals &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (o == null || getClass() != o.getClass()) return false;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Feedback feedback = (Feedback) o;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_85'/>
+85
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_85'>3</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : negated conditional &rarr; KILLED<br/>
+
+3. equals : replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::equals &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attempt.equals(feedback.attempt) &#38;&#38; letterFeedbackList.equals(feedback.letterFeedbackList);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_86'/>
+86
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_86'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_87'/>
+87
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_87'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_88'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_89'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int hashCode() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_90'/>
+90
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_90'>1</a>
+<span>
+
+1. hashCode : replaced int return with 0 for nl/hu/cisq1/lingo/trainer/domain/Feedback::hashCode &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return Objects.hash(attempt, letterFeedbackList);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_91'/>
+91
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_91'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_92'/>
+92
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_92'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_93'/>
+93
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_93'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_94'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public String toString() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_95'/>
+95
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_95'>1</a>
+<span>
+
+1. toString : replaced return value with &#34;&#34; for nl/hu/cisq1/lingo/trainer/domain/Feedback::toString &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return &#34;Feedback{&#34; +</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_96'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                &#34;attempt=&#39;&#34; + attempt + &#39;\&#39;&#39; +</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_97'/>
+97
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_97'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                &#34;, letterFeedbackList=&#34; + letterFeedbackList +</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_98'/>
+98
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_98'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                &#39;}&#39;;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_99'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_100'/>
+100
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_100'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_101'/>
+101
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_101'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public List&#60;LetterFeedback&#62; getLetterFeedbackList() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_102'/>
+102
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_102'>1</a>
+<span>
+
+1. getLetterFeedbackList : replaced return value with Collections.emptyList for nl/hu/cisq1/lingo/trainer/domain/Feedback::getLetterFeedbackList &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return letterFeedbackList;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_103'/>
+103
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_103'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_104'/>
+104
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_104'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_26'>26</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_26'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:getLetterFeedbackList()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_35'>35</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_35'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>valid<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:isValid()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>valid<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:isValid()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_38'>38</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_38'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>valid<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:isValid()]</span></span> replaced return value with null for nl/hu/cisq1/lingo/trainer/domain/Feedback::valid &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_43'>43</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_43'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>giveHint<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:previousHintAndFeedbackListNotSameLength(java.util.List, java.util.List)]/[test-template-invocation:#1]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_47'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>giveHint<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:wordToGuessAndFeedbackListNotSameLength(java.lang.String, java.util.List)]/[test-template-invocation:#3]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_55'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>giveHint<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:giveHint(java.lang.String, java.util.List, java.util.List, java.util.List)]/[test-template-invocation:#1]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>giveHint<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:giveHint(java.lang.String, java.util.List, java.util.List, java.util.List)]/[test-template-invocation:#4]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_56'>56</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_56'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>giveHint<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:giveHint(java.lang.String, java.util.List, java.util.List, java.util.List)]/[test-template-invocation:#1]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>giveHint<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:giveHint(java.lang.String, java.util.List, java.util.List, java.util.List)]/[test-template-invocation:#4]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_61'>61</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_61'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>giveHint<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:giveHint(java.lang.String, java.util.List, java.util.List, java.util.List)]/[test-template-invocation:#1]</span></span> replaced return value with Collections.emptyList for nl/hu/cisq1/lingo/trainer/domain/Feedback::giveHint &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_65'>65</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_65'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isWordGuessed<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:wordIsGuessed()]</span></span> replaced boolean return with false for nl/hu/cisq1/lingo/trainer/domain/Feedback::isWordGuessed &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isWordGuessed<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:wordIsNotGuessed()]</span></span> replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::isWordGuessed &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_67'>67</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_67'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$isWordGuessed$0<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:wordIsGuessed()]</span></span> replaced boolean return with false for nl/hu/cisq1/lingo/trainer/domain/Feedback::lambda$isWordGuessed$0 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$isWordGuessed$0<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:wordIsNotGuessed()]</span></span> replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::lambda$isWordGuessed$0 &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_71'>71</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_71'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isGuessValid<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:guessIsValid()]</span></span> replaced boolean return with false for nl/hu/cisq1/lingo/trainer/domain/Feedback::isGuessValid &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isGuessValid<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:guessIsInvalid()]</span></span> replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::isGuessValid &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_73'>73</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_73'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$isGuessValid$1<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:guessIsInvalid()]</span></span> replaced boolean return with false for nl/hu/cisq1/lingo/trainer/domain/Feedback::lambda$isGuessValid$1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$isGuessValid$1<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:guessIsValid()]</span></span> replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::lambda$isGuessValid$1 &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_77'>77</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_77'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isSameLength<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:getLetterFeedbackList()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isSameLength<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:isInvalid()]</span></span> replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::isSameLength &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_82'>82</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_82'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:testNotEqualsClass(nl.hu.cisq1.lingo.trainer.domain.Feedback, java.lang.Object)]/[test-template-invocation:#1]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:testEquals()]</span></span> replaced boolean return with false for nl/hu/cisq1/lingo/trainer/domain/Feedback::equals &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_83'>83</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_83'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:testEquals()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:testEquals()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:testNotEqualsClass(nl.hu.cisq1.lingo.trainer.domain.Feedback, java.lang.Object)]/[test-template-invocation:#1]</span></span> replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::equals &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_85'>85</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_85'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:testEquals()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:testEquals()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:testNotEqualsClass(nl.hu.cisq1.lingo.trainer.domain.Feedback, java.lang.Object)]/[test-template-invocation:#3]</span></span> replaced boolean return with true for nl/hu/cisq1/lingo/trainer/domain/Feedback::equals &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_90'>90</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_90'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hashCode<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:testHashCode()]</span></span> replaced int return with 0 for nl/hu/cisq1/lingo/trainer/domain/Feedback::hashCode &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_95'>95</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_95'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>toString<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:testToString()]</span></span> replaced return value with &#34;&#34; for nl/hu/cisq1/lingo/trainer/domain/Feedback::toString &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7ae75ba6_102'>102</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7ae75ba6_102'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getLetterFeedbackList<br/><b>Killed by : </b>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:getLetterFeedbackList()]</span></span> replaced return value with Collections.emptyList for nl/hu/cisq1/lingo/trainer/domain/Feedback::getLetterFeedbackList &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+
+<li class='mutator'>EMPTY_RETURNS</li>
+
+<li class='mutator'>FALSE_RETURNS</li>
+
+<li class='mutator'>INCREMENTS</li>
+
+<li class='mutator'>INVERT_NEGS</li>
+
+<li class='mutator'>MATH</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+
+<li class='mutator'>NULL_RETURNS</li>
+
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+
+<li class='mutator'>TRUE_RETURNS</li>
+
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:wordToGuessAndFeedbackListNotSameLength(java.lang.String, java.util.List)]/[test-template-invocation:#2] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:testEquals()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:wordToGuessAndFeedbackListNotSameLength(java.lang.String, java.util.List)]/[test-template-invocation:#4] (5 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:testToString()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.ProgressTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.ProgressTest]/[test-template:getFeedbackHistory(nl.hu.cisq1.lingo.trainer.domain.Progress, java.util.List)]/[test-template-invocation:#1] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.GameTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.GameTest]/[method:guessIncorrectlySpelledWord()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[test-template:getLatestLetterFeedback(nl.hu.cisq1.lingo.trainer.domain.Round, java.util.List)]/[test-template-invocation:#1] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Round, java.lang.Object)]/[test-template-invocation:#3] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.application.TrainerServiceTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.application.TrainerServiceTest]/[method:guessWordIncorrectlySpelled()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:giveHint(java.lang.String, java.util.List, java.util.List, java.util.List)]/[test-template-invocation:#4] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Round, java.lang.Object)]/[test-template-invocation:#1] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.application.TrainerServiceTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.application.TrainerServiceTest]/[method:getProgress()] (7 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[method:giveFeedback()] (1 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.GameTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.GameTest]/[method:guessWhenAttemptLimitExceeded()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Round, java.lang.Object)]/[test-template-invocation:#5] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:guessIsValid()] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:previousHintAndFeedbackListNotSameLength(java.util.List, java.util.List)]/[test-template-invocation:#4] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:previousHintAndFeedbackListNotSameLength(java.util.List, java.util.List)]/[test-template-invocation:#2] (5 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.ProgressTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.ProgressTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Progress, java.lang.Object)]/[test-template-invocation:#4] (5 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:wordIsNotGuessed()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.ProgressTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.ProgressTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Progress, java.lang.Object)]/[test-template-invocation:#2] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:isInvalid()] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:testNotEqualsClass(nl.hu.cisq1.lingo.trainer.domain.Feedback, java.lang.Object)]/[test-template-invocation:#2] (5 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:testNotEqualsClass(nl.hu.cisq1.lingo.trainer.domain.Feedback, java.lang.Object)]/[test-template-invocation:#4] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[method:differentFeedbackHistory()] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:giveHint(java.lang.String, java.util.List, java.util.List, java.util.List)]/[test-template-invocation:#1] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[method:notDifferentFeedbackHistory()] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.application.TrainerServiceTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.application.TrainerServiceTest]/[method:startNewRound()] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.GameTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.GameTest]/[method:calculateScore()] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.application.TrainerServiceTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.application.TrainerServiceTest]/[method:guessWordCorrectlySpelled()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:wordIsGuessed()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:guessIsInvalid()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.ProgressTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.ProgressTest]/[test-template:getFeedbackHistory(nl.hu.cisq1.lingo.trainer.domain.Progress, java.util.List)]/[test-template-invocation:#2] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.ProgressTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.ProgressTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Progress, java.lang.Object)]/[test-template-invocation:#8] (5 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.ProgressTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.ProgressTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Progress, java.lang.Object)]/[test-template-invocation:#6] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:wordToGuessAndFeedbackListNotSameLength(java.lang.String, java.util.List)]/[test-template-invocation:#3] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[method:validGuess()] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:wordToGuessAndFeedbackListNotSameLength(java.lang.String, java.util.List)]/[test-template-invocation:#1] (5 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[test-template:getLatestLetterFeedback(nl.hu.cisq1.lingo.trainer.domain.Round, java.util.List)]/[test-template-invocation:#2] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[method:getFeedbackHistory()] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:giveHint(java.lang.String, java.util.List, java.util.List, java.util.List)]/[test-template-invocation:#3] (6 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Round, java.lang.Object)]/[test-template-invocation:#2] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:testHashCode()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Round, java.lang.Object)]/[test-template-invocation:#4] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.GameTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.GameTest]/[method:guessWhenWaitingForRound()] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:isValid()] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[method:giveFeedbackGuessedWordIncorrectLength()] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:previousHintAndFeedbackListNotSameLength(java.util.List, java.util.List)]/[test-template-invocation:#3] (5 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:previousHintAndFeedbackListNotSameLength(java.util.List, java.util.List)]/[test-template-invocation:#1] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.ProgressTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.ProgressTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Progress, java.lang.Object)]/[test-template-invocation:#5] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.ProgressTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.ProgressTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Progress, java.lang.Object)]/[test-template-invocation:#3] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.ProgressTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.ProgressTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Progress, java.lang.Object)]/[test-template-invocation:#1] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[method:getLetterFeedbackList()] (2 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:testNotEqualsClass(nl.hu.cisq1.lingo.trainer.domain.Feedback, java.lang.Object)]/[test-template-invocation:#3] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.GameTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.GameTest]/[method:showProgress()] (3 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:testNotEqualsClass(nl.hu.cisq1.lingo.trainer.domain.Feedback, java.lang.Object)]/[test-template-invocation:#1] (4 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.FeedbackTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.FeedbackTest]/[test-template:giveHint(java.lang.String, java.util.List, java.util.List, java.util.List)]/[test-template-invocation:#2] (5 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.RoundTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.RoundTest]/[method:giveFeedbackInvalidWord()] (1 ms)</li><li>nl.hu.cisq1.lingo.trainer.domain.ProgressTest.[engine:junit-jupiter]/[class:nl.hu.cisq1.lingo.trainer.domain.ProgressTest]/[test-template:testNotEquals(nl.hu.cisq1.lingo.trainer.domain.Progress, java.lang.Object)]/[test-template-invocation:#7] (3 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.7.3
+
+</body>
+</html>
