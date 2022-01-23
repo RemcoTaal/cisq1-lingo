@@ -6,6 +6,7 @@ import nl.hu.cisq1.lingo.trainer.domain.Game;
 import nl.hu.cisq1.lingo.words.data.SpringWordRepository;
 import nl.hu.cisq1.lingo.words.domain.Word;
 import org.json.JSONObject;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,10 +152,9 @@ class TrainerControllerIntegrationTest {
     }
 
     @Test
-    @Disabled
+    @Disabled("Ik kreeg het niet voor elkaar om een nested method te testen :(")
     void getProgress() throws Exception {
         // Given
-        // Ik kreeg het niet voor elkaar om een nested method te testen :(
         Game game = Game.withProgress();
         spy = spy(game);
 
